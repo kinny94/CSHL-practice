@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:mp="http://www.matrixscience.com/xmlns/schema/distiller_master_project_1"
+	targetNamespace="http://www.matrixscience.com/xmlns/schema/distiller_master_project_1">
+	
+	<xs:element name="MasterProject" type="mp:master_project_t">
+		<xs:annotation>
+			<xs:documentation>Mascot Distiller Master Project Information</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:simpleType name="minorVersion_t">
+		<xs:restriction base="xs:unsignedShort">
+			<xs:maxInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="master_project_t">
+		<xs:sequence>
+			<xs:element name="SubProject" type="mp:subproject_t" minOccurs="2" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Searches" type="mp:searches_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+
+		<xs:attribute name="majorVersion" type="xs:unsignedShort" use="required" fixed="1">
+			<xs:annotation>
+				<xs:documentation>Major version number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="minorVersion" type="mp:minorVersion_t" use="required">
+			<xs:annotation>
+				<xs:documentation>Minor version number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+
+		<xs:attribute name="current" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Currently opening Datasource</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+
+		<xs:attribute name="count" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Number of subprojects</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	
+	
+	</xs:complexType>
+	
+	<xs:simpleType name="projectType_t">
+		<xs:annotation>
+			<xs:documentation></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="project">
+				<xs:annotation>
+					<xs:documentation>Sub project is a Mascot Distiller project</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="raw">
+				<xs:annotation>
+					<xs:documentation>Sub project is a rawfile</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:complexType name="datasourceParameters_t">
+		<xs:attribute name="centroid" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>1 = centroid </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="precursorCharge" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>Precursor charge</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="precursorMz" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>base 64 encoded precursor m/z</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="scanType" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>mdroScanType_e scantype enumeration</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ionPolarity" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>mdroIonPolarity_e polarity</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="subproject_t">
+		<xs:sequence>
+			<xs:element name="parameters" type="mp:datasourceParameters_t" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Datasource parameters</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="RawFormat" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>mdro file format</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="havePeaklist" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>Peaklist info</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ProjectPathRel" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Relative path to project</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RawPathRel" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Relative Path to raw-file</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="subProjectName" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Name of sub-project</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+ 		<xs:attribute name="type" type="mp:projectType_t" use="required">
+			<xs:annotation>
+				<xs:documentation>Subproject Type</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="id" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>Sub project ID</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RawSampleNumber" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Sample Number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RawPathAbs" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Absolute path to rawfile</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="searches_t">
+		<xs:sequence>
+			<xs:element name="Search" type="mp:search_t" minOccurs="0" maxOccurs="unbounded">
+				
+			</xs:element>
+		</xs:sequence>
+
+		<xs:attribute name="count" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Number of searches</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	
+		
+	</xs:complexType>
+	
+	<xs:complexType name="search_t">
+		<xs:sequence>
+			<xs:element name="SearchParams" type="mp:search_params_t" minOccurs="1" maxOccurs="1">
+				
+				
+			</xs:element>
+			<xs:element name="SubSearches" type="mp:sub_searches_t" minOccurs="1" maxOccurs="1">
+				
+				
+			</xs:element>
+		</xs:sequence>
+		
+		<xs:attribute name="parserCache" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>parser cachefilke</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	
+		<xs:attribute name="id" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Search ID</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="search_params_t">
+		<xs:sequence>
+			<xs:element name="Param" type="mp:param_t" minOccurs="0" maxOccurs="unbounded">
+			</xs:element>
+		</xs:sequence>
+		
+		<xs:attribute name="boundary" type="xs:string" use="required">
+			
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="param_t">
+		<xs:attribute name="value" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Value of parameter</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Search parameter</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		
+	</xs:complexType>
+	
+	<xs:complexType name="sub_searches_t">
+		<xs:sequence>
+			<xs:element name="SubSearch" type="mp:sub_search_t" minOccurs="0" maxOccurs="unbounded">
+				
+				
+			</xs:element>
+		</xs:sequence>	
+	</xs:complexType>
+	
+	<xs:complexType name="sub_search_t">
+		<xs:attribute name="title" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Search title</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="taskID" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Search taskID</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="resultFile" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Result file</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		
+	</xs:complexType>
+</xs:schema>
+

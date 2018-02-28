@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:rst="http://www.matrixscience.com/xmlns/schema/distiller_preferences_1" xmlns:dmd="http://www.matrixscience.com/xmlns/schema/distiller_massdelta_1" targetNamespace="http://www.matrixscience.com/xmlns/schema/distiller_preferences_1" elementFormDefault="qualified">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en-GB">
+				This schema is for serialization of Distiller preferences..
+				</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.matrixscience.com/xmlns/schema/distiller_massdelta_1" schemaLocation="distiller_massdelta_1.xsd"/>
+	<xsd:simpleType name="minorVersion_t">
+		<xsd:restriction base="xsd:unsignedShort">
+			<xsd:maxInclusive value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="distillerPreferences" type="rst:distillerPreferences_t"/>
+	<xsd:simpleType name="modtype_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="fix"/>
+			<xsd:enumeration value="var"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="modifications_t">
+		<xsd:sequence>
+			<xsd:element name="Mod" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:attribute name="Name" type="xsd:string"/>
+					<xsd:attribute name="type" type="rst:modtype_t"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="ICAT" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="ionSeries_t">
+		<xsd:attribute name="Ions" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="searchOptions_t">
+		<xsd:sequence>
+			<xsd:element name="Modifications" type="rst:modifications_t" minOccurs="0"/>
+			<xsd:element name="IonSeries" type="rst:ionSeries_t" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="PepUnit" type="xsd:string" use="optional"/>
+		<xsd:attribute name="FragUnit" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Taxonomy" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Database" type="xsd:string" use="optional"/>
+		<xsd:attribute name="PepTol" type="xsd:string" use="optional"/>
+		<xsd:attribute name="FragTol" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Missed" type="xsd:integer" use="optional"/>
+		<xsd:attribute name="ProtMass" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Enzyme" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Instrument" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Quantitation" type="xsd:string" use="optional"/>
+		<xsd:attribute name="ErrorTolerant" type="xsd:integer" use="optional"/>
+		<xsd:attribute name="Decoy" type="xsd:integer" use="optional"/>
+		<xsd:attribute name="PepIsotopeError" type="xsd:integer" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="massMarkLayout_t">
+		<xsd:attribute name="Orientation" type="xsd:integer"/>
+		<xsd:attribute name="BarHeight" type="xsd:integer"/>
+		<xsd:attribute name="ShapeHeight" type="xsd:integer"/>
+		<xsd:attribute name="ShapeColor" type="xsd:integer"/>
+		<xsd:attribute name="BarHeightMode" type="xsd:integer"/>
+		<xsd:attribute name="BarColor" type="xsd:integer"/>
+		<xsd:attribute name="Shape" type="xsd:integer"/>
+		<xsd:attribute name="Bar" type="xsd:integer"/>
+		<xsd:attribute name="ShapeHeightMode" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="distillerPreferences_t">
+		<xsd:sequence>
+			<xsd:element name="preferences" type="rst:preferences_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="majorVersion" type="xsd:unsignedShort" use="required" fixed="1"/>
+		<xsd:attribute name="minorVersion" type="rst:minorVersion_t" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="preferences_t">
+		<xsd:sequence>
+			<xsd:element name="generalTab" type="rst:generalTab_t"/>
+			<xsd:element name="loggingTab" type="rst:loggingTab_t"/>
+			<xsd:element name="denovotagTab" type="rst:denovotagTab_t"/>
+			<xsd:element name="fragmentTab" type="rst:fragmentTab_t"/>
+			<xsd:element name="digestTab" type="rst:digestTab_t"/>
+			<xsd:element name="peaklistformatTab" type="rst:peaklistformatTab_t"/>
+			<xsd:element name="mascotSearchTab" type="rst:mascotSearchTab_t"/>
+			<xsd:element name="mascotserverTab" type="rst:mascotseerverTab_t"/>
+			<xsd:element name="processingOptionTab" type="rst:processingOptionTab_t"/>
+			<xsd:element name="massDeltaTab" type="rst:massDeltaTab_t"/>
+			<xsd:element name="ticTab" type="rst:ticTab_t"/>
+			<xsd:element name="scanTab" type="rst:scanTab_t"/>
+			<xsd:element name="blastserverTab" type="rst:blastserverTab_t"/>
+			<xsd:element name="msBlastserverTab" type="rst:MSBlastserverTab_t"/>
+			<xsd:element name="globalPrefs" type="rst:globalPrefs_t"/>
+			<xsd:element name="quantTableTab" type="rst:quantTableTab_t" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="globalPrefs_t">
+		<xsd:attribute name="SpectrumBar" type="xsd:integer"/>
+		<xsd:attribute name="PeaklistBar" type="xsd:integer"/>
+		<xsd:attribute name="Calculator" type="xsd:integer"/>
+		<xsd:attribute name="DatasetExp" type="xsd:integer"/>
+		<xsd:attribute name="AnalysisBar" type="xsd:integer"/>
+		<xsd:attribute name="StatusBar" type="xsd:integer"/>
+		<xsd:attribute name="LargeIcons" type="xsd:integer"/>
+		<xsd:attribute name="ToolBar" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:simpleType name="scoringType_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration  value="auto"/>
+			<xsd:enumeration  value="mudpit" />
+			<xsd:enumeration value="standard" />
+		</xsd:restriction>
+	</xsd:simpleType>	
+	<xsd:complexType name="MascotImportOptions_t">
+		<xsd:sequence>
+			<xsd:element name="blueoptions" type="rst:blueoptions" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="quant_method_extra" type="rst:quantMethodExtra_t" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+		<xsd:attribute name="quantMethod" type="xsd:string" use="optional"/>
+		<xsd:attribute name="firsttime" type="xsd:integer" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="blueoptions">
+		<xsd:attribute name="requireBoldRed" type="xsd:boolean" use="optional"/>
+		<xsd:attribute name="showSameset" type="xsd:boolean" use="optional"/>
+		<xsd:attribute name="showSubset" type="xsd:string" use="optional"/>
+		<xsd:attribute name="loadUnassignedList" type="xsd:boolean" use="optional"/>
+		<xsd:attribute name="significanceThreshold" type="xsd:string" use="optional" />
+		<xsd:attribute name="scoringType" type="rst:scoringType_t" use="optional" />
+		<xsd:attribute name="reportTop" type="xsd:integer" use="optional" />
+		<xsd:attribute name="ionScoreCutOff" type="xsd:integer" use="optional" />
+		<xsd:attribute name="ErrTolPeptide" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="proteinGrouping" type="xsd:string" use="optional" />
+		<xsd:attribute name="percolator" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="ScoreExpectCutOff" type="xsd:string" use="optional" />
+		<xsd:attribute name="showSamesetFamily" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="showSubsetFamily" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="significanceThresholdStr" type="xsd:string" use="optional" />	
+	</xsd:complexType>
+	<xsd:complexType name="quantMethodExtra_t">
+		<xsd:attribute name="matchedRho" type="xsd:string" use="optional" />
+		<xsd:attribute name="allChargeStateThreshold" type="xsd:string" use="optional" />
+		<xsd:attribute name="XICThreshold" type="xsd:string" use="optional" />
+		<xsd:attribute name="maxXICwidth" type="xsd:string" use="optional" />
+		<xsd:attribute name="isolatedPrecursorThreshold" type="xsd:string" use="optional" />
+		<xsd:attribute name="XICSmooth" type="xsd:string" use="optional" />
+		<xsd:attribute name="SimpleRatio" type="xsd:string" use="optional" />
+	</xsd:complexType>
+
+	<xsd:complexType name="quantTableTab_t">
+		<xsd:sequence>
+			<xsd:element name="QuantTableColumn" type="rst:quantTableColumnIncl_t" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="quantTableColumnIncl_t">
+		<xsd:attribute name="col" type="xsd:integer" use="required" />
+		<xsd:attribute name="show" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="procOptEntry_t">
+		<xsd:attribute name="Default" type="xsd:integer"/>
+		<xsd:attribute name="UserName" type="xsd:string"/>
+		<xsd:attribute name="File" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="procOptEntryList_t">
+		<xsd:sequence>
+			<xsd:element name="Entry" type="rst:procOptEntry_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="MDROtype" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="associations_t">
+		<xsd:sequence>
+			<xsd:element name="ProcOptList" type="rst:procOptEntryList_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="processingOptionTab_t">
+		<xsd:sequence>
+			<xsd:element name="Associations" type="rst:associations_t"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MSBlastServer_t">
+		<xsd:attribute name="Server" type="xsd:string"/>
+		<xsd:attribute name="HTMLField" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="MSBlastServers_t">
+		<xsd:sequence>
+			<xsd:element name="MSBlast" type="rst:MSBlastServer_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="Default" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="MSBlastserverTab_t">
+		<xsd:sequence>
+			<xsd:element name="MSBlastServers" type="rst:MSBlastServers_t"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="blastServer_t">
+		<xsd:attribute name="Server" type="xsd:string"/>
+		<xsd:attribute name="Peptide" type="xsd:string"/>
+		<xsd:attribute name="Protein" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="blastServers_t">
+		<xsd:sequence>
+			<xsd:element name="Blast" type="rst:blastServer_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="Default" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="blastserverTab_t">
+		<xsd:sequence>
+			<xsd:element name="BlastServers" type="rst:blastServers_t"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="mascotServer_t">
+		<xsd:sequence>
+			<xsd:element name="HTTP" type="rst:HTTPsettings_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Username" type="xsd:string"/>
+		<xsd:attribute name="URL" type="xsd:string"/>
+		<xsd:attribute name="Password" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="HTTPsettings_t">
+		<xsd:attribute name="Server" type="xsd:string"/>
+		<xsd:attribute name="Timeout" type="xsd:integer"/>
+		<xsd:attribute name="Proxy" type="xsd:integer"/>
+		<xsd:attribute name="Protocol" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="mascotseerverTab_t">
+		<xsd:sequence>
+			<xsd:element name="MascotServers">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Server" type="rst:mascotServer_t" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="Default" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="peaklistformatTab_t">
+		<xsd:attribute name="MassTypeFragment" type="xsd:integer"/>
+		<xsd:attribute name="MassTypePMF" type="xsd:integer"/>
+		<xsd:attribute name="ProcOptHeader" type="xsd:integer"/>
+		<xsd:attribute name="IncScanName" type="xsd:integer"/>
+		<xsd:attribute name="SinglePeakList" type="xsd:integer"/>
+		<xsd:attribute name="IncScanLabel" type="xsd:integer"/>
+		<xsd:attribute name="MGFUserParams" type="xsd:integer" use="optional"/>
+		<xsd:attribute name="UseSNRatioAsIntensity" type="xsd:integer" use="optional"/>
+    <xsd:attribute name="MultiplePrecursors" type="xsd:integer" use="optional"/>
+    <xsd:attribute name="TitleIncludePSICV" type="xsd:integer" use="optional"/>
+    <xsd:attribute name="OutputInstrumentChoice" type="xsd:string" use="optional"/>
+    <xsd:attribute name="OutputInstrument" type="xsd:integer" use="optional"/>
+    <xsd:attribute name="OutputInstrumentDissType" type="xsd:integer" use="optional"/>
+  </xsd:complexType>
+	<xsd:complexType name="massDeltaTab_t">
+		<xsd:sequence>
+			<xsd:element ref="dmd:distillerMassdelta"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="spotElement_t">
+		<xsd:sequence>
+			<xsd:element name="Spot" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:attribute name="clr" type="xsd:integer"/>
+					<xsd:attribute name="Style" type="xsd:integer"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ticTab_t">
+		<xsd:sequence>
+			<xsd:element name="Spots" type="rst:spotElement_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="OverView" type="xsd:integer"/>
+		<xsd:attribute name="CursorStyle" type="xsd:integer"/>
+		<xsd:attribute name="clrScan" type="xsd:integer"/>
+		<xsd:attribute name="clrText" type="xsd:integer"/>
+		<xsd:attribute name="clrCursor" type="xsd:integer"/>
+		<xsd:attribute name="DrawMethod" type="xsd:integer"/>
+		<xsd:attribute name="clrBackground" type="xsd:integer"/>
+		<xsd:attribute name="AutoArrange" type="xsd:integer"/>
+		<xsd:attribute name="Units" type="xsd:integer"/>
+		<xsd:attribute name="clrGrid" type="xsd:integer"/>
+		<xsd:attribute name="InterpolateDepScans" type="xsd:integer" use="optional" />
+		<xsd:attribute name="InterpolateCalibScans" type="xsd:integer" use="optional" />
+		<xsd:attribute name="Units2" type="xsd:integer" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="scanTab_t">
+		<xsd:attribute name="MaxCharge" type="xsd:integer"/>
+		<xsd:attribute name="OverView" type="xsd:integer"/>
+		<xsd:attribute name="ChargeTicks" type="xsd:integer"/>
+		<xsd:attribute name="clrScan" type="xsd:integer"/>
+		<xsd:attribute name="clrText" type="xsd:integer"/>
+		<xsd:attribute name="DrawMethod" type="xsd:integer"/>
+		<xsd:attribute name="ChargeDistance" type="xsd:integer"/>
+		<xsd:attribute name="clrBackground" type="xsd:integer"/>
+		<xsd:attribute name="AutoArrange" type="xsd:integer"/>
+		<xsd:attribute name="clrGrid" type="xsd:integer"/>
+		<xsd:attribute name="clrChargeState" type="xsd:integer"/>
+		<xsd:attribute name="clrDistance" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="mascotSearchTab_t">
+		<xsd:sequence>
+			<xsd:element name="SearchOptions" type="rst:searchOptions_t"/>
+			<xsd:element name="MascotImportOptions" type="rst:MascotImportOptions_t" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="ReportTop" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="fragmentTab_t">
+		<xsd:sequence>
+			<xsd:element name="SearchOptions" type="rst:searchOptions_t"/>
+			<xsd:element name="MMLayout" type="rst:massMarkLayout_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="Tooltip" type="xsd:string"/>
+		<xsd:attribute name="clrNTerm" type="xsd:integer"/>
+		<xsd:attribute name="clrCTerm" type="xsd:integer"/>
+		<xsd:attribute name="Label" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="digestTab_t">
+		<xsd:sequence>
+			<xsd:element name="SearchOptions" type="rst:searchOptions_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="Charge" type="xsd:integer"/>
+		<xsd:attribute name="clrPeak" type="xsd:integer"/>
+		<xsd:attribute name="clrLine" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="denovotagTab_t">
+		<xsd:sequence>
+			<xsd:element name="SearchOptions" type="rst:searchOptions_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="MissOnePeak" type="xsd:integer"/>
+		<xsd:attribute name="DenovoSolutions" type="xsd:integer"/>
+		<xsd:attribute name="ShowComplement" type="xsd:integer"/>
+		<xsd:attribute name="EnzymeType" type="xsd:integer"/>
+		<xsd:attribute name="ErrorTag" type="xsd:integer"/>
+		<xsd:attribute name="clrSuggestSeq" type="xsd:integer"/>
+		<xsd:attribute name="UseJCode" type="xsd:integer" use="optional" />
+		<xsd:attribute name="UseOCode" type="xsd:integer" use="optional" />
+		<xsd:attribute name="UseUCode" type="xsd:integer" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="generalTab_t">
+		<xsd:attribute name="clrResidues" type="xsd:integer"/>
+		<xsd:attribute name="NumDeciScan" type="xsd:integer"/>
+		<xsd:attribute name="AutoArrange" type="xsd:integer"/>
+		<xsd:attribute name="clrModResidues" type="xsd:integer"/>
+		<xsd:attribute name="NumDeciTable" type="xsd:integer"/>
+		<xsd:attribute name="FontSize" type="xsd:integer"/>
+		<xsd:attribute name="MaxThread" type="xsd:integer" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="loggingTab_t">
+		<xsd:attribute name="Logging" type="xsd:integer"/>
+		<xsd:attribute name="LogLevels" type="xsd:integer"/>
+		<xsd:attribute name="DeleteLogFile" type="xsd:integer"/>
+		<xsd:attribute name="DisplayLogPane" type="xsd:integer"/>
+		<xsd:attribute name="LogToFile" type="xsd:integer"/>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,1013 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:mdq="http://www.matrixscience.com/xmlns/schema/distiller_quantitation_1" 
+  xmlns:mqm="http://www.matrixscience.com/xmlns/schema/quantitation_1" 
+  targetNamespace="http://www.matrixscience.com/xmlns/schema/distiller_quantitation_1" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.matrixscience.com/xmlns/schema/quantitation_1" 
+	schemaLocation="http://www.matrixscience.com/xmlns/schema/quantitation_1/quantitation_1.xsd"/>
+	<xs:element name="quantitationResults" type="mdq:quantitationResults_t">
+		<xs:annotation>
+			<xs:documentation>Mascot Distiller quantitation results</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="quantitationResults_t">
+		<xs:sequence>
+			<xs:element name="rawfiles" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Contain misc. information about raw files in Distiller project</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="mdq:quantOneRawfileInfo_t"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="header" type="mdq:quantHeaderInfo_t">
+				<xs:annotation>
+					<xs:documentation>Misc. information that might be useful in report header, such as filenames and search parameters</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="mqm:quantitation"/>
+			<xs:element name="peptideGrouping" type="mdq:quantGroups_t">
+				<xs:annotation>
+					<xs:documentation>Mascot search results, organised as a series of protein hits, each with assigned peptide matches. As used to create proteins tree in Distiller.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="peptideMatch" type="mdq:quantDataMatch_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Quantitation data for each peptide ratio. Corresponds to second level rows in quantitation table</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="proteinHit" type="mdq:proteinHit_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Quantitation data for each protein hit. Corresponds to top level rows in quantitation table</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="peptide" type="mdq:peptide_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Data for individual Mascot peptide matches. Corresponds to third level rows in quantitation table</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="averageResult" type="mdq:averageSpecific_t" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Average protocol specific information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="majorVersion" type="xs:unsignedShort" use="required" fixed="1">
+			<xs:annotation>
+				<xs:documentation>Major version number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="minorVersion" type="mdq:minorVersion_t" use="required">
+			<xs:annotation>
+				<xs:documentation>Minor version number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="minorVersion_t">
+		<xs:annotation>
+			<xs:documentation>Schema minor version number</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedShort">
+			<xs:maxInclusive value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="matrixValue_t">
+		<xs:attribute name="c" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Zero based column number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="r" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Zero based row number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="val" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Element value</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="val_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>val as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="decimalMatrix_t">
+		<xs:annotation>
+			<xs:documentation>Matrix of floating point numbers. Only non-zero values need to be specified. Row and column counts are zero based.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="elem" type="mdq:matrixValue_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Matrix elements with non-zero values</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="col_size" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Number of columns in matrix</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="row_size" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Number of rows in matrix</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="matchCharge_t">
+		<xs:annotation>
+			<xs:documentation>Maps: typedef enum matchChargeTypes_e</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="matchChargeOriginal">
+				<xs:annotation>
+					<xs:documentation>Charge state found in result file</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="matchChargeAllCharge">
+				<xs:annotation>
+					<xs:documentation>Match created in all charge states</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="quantRatioStatusCode_t">
+		<xs:annotation>
+			<xs:documentation>Maps: ratioStatusCodes_e</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AreaFractionBelowThreshold">
+				<xs:annotation>
+					<xs:documentation>Below fraction threshold</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PeakCorrBelowThreshold">
+				<xs:annotation>
+					<xs:documentation>Below correlation threshold</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RatioUndefined">
+				<xs:annotation>
+					<xs:documentation>Undefined ratio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="StdErrAboveTreshold">
+				<xs:annotation>
+					<xs:documentation>Above Std. Err. threshold</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NegativeRatio">
+				<xs:annotation>
+					<xs:documentation>Negative ratio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="InfiniteRatio">
+				<xs:annotation>
+					<xs:documentation>Infinite ratio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZeroRatio">
+				<xs:annotation>
+					<xs:documentation>Zero ratio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OutlierRatio">
+				<xs:annotation>
+					<xs:documentation>Ratio is outlier</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ok">
+				<xs:annotation>
+					<xs:documentation>Good ratio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="quantRatioStatus_t">
+		<xs:annotation>
+			<xs:documentation>Maps: CQuantRatioStatus</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="state" type="mdq:quantRatioStatusCode_t" use="required">
+			<xs:annotation>
+				<xs:documentation>String code describing reason for rejection</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="info" type="xs:double" use="optional">
+			<xs:annotation>
+				<xs:documentation>decimal code describing the threshold that caused rejection</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="info_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>info as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="bucketArea_t">
+		<xs:annotation>
+			<xs:documentation>Maps: bucket_area map</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="scan" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Scan number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="area" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Total fitted peak area</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="area_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>area as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="quantOneRawfileInfo_t">
+		<xs:sequence>
+			<xs:element name="rawfile" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Misc. information about a single rawfile </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="mdq:quantHeaderInfo_t"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="number" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>Index in rawfiles element</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="quantHeaderInfo_t">
+		<xs:sequence>
+			<xs:element name="info" type="mdq:infoBlock_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Container for a label/value pairs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="index" type="xs:integer" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="infoBlock_t">
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Parameter label</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="val" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Parameter value</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="quantGroups_t">
+		<xs:sequence>
+			<xs:element name="hit" type="mdq:peptideGroupHit_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A protein hit</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="peptideGroupHit_t">
+		<xs:sequence>
+			<xs:element name="peptide" type="mdq:peptideGroupStatus_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Peptide matches assigned to this protein</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="h" type="xs:positiveInteger">
+			<xs:annotation>
+				<xs:documentation>Protein hit number (1 based)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="peptideGroupStatus_t">
+		<xs:attribute name="q" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Mascot query number (1 based)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="r" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Mascot rank number (1 is highest scoring match)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="pepStr" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Peptide sequence in 1 letter code</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="varMods" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Variable modifications encoded as string of integers</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="comp" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Assigned component, if any</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="status" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Whether this match passes the quality thresholds and can be used for quantitation</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="quantCSDataMatch_t">
+		<xs:annotation>
+			<xs:documentation>Maps: CQuantCSDataMatch</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bucketArea" type="mdq:bucketArea_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Peak area falling in all buckets for each scan in XIC peak. CQuantCSDataMatch::m_bucket_areas</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="correctedMinSPPwidth" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Minimum peak width used for final stage of peak detection. Maps:  CQuantCSDataMatch::m_correct_SPP_width_min</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="correctedMinSPPwidth_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>correctedMinSPPwidth as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="correctedMaxSPPwidth" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Maximum peak width used for final stage of peak detection. Maps: CQuantCSDataMatch:m_correct_SPP_width_max</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="correctedMaxSPPwidth_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>correctedMaxSPPwidth as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="correctedSPPwidth" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Expected peak width used for final stage of peak detection. Maps: CQuantCSDataMatch:m_correct_SPP_width</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="correctedSPPwidth_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>correctedSPPwidth as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="bucketWidth" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Width of buckets used to collect peak area. Maps: CQuantCSDataMatch:m_bucket_width</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="bucketWidth_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>bucketWidth as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="maxAlignment" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Offset required for optimum alignment of buckets with spectrum. Maps: CQuantCSDataMatch:m_SPP_maxAlignment</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="maxAlignment_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>maxAlignment as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="matchedRho" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Correlation coefficient between calculated and experimental spectrum in XIC region. A value of 1.0 indicates a perfect fit.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="matchedRho_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>matchedRho as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="matchedFraction" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>FItted peak area as a fraction of total peak area in XIC region. Value of 1.0 is perfect. Maps: CQuantCSDataMatch:m_matchedFraction</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="matchedFraction_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>matchedFraction as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="totalIntensity" type="xs:double" use="optional">
+			<xs:annotation>
+				<xs:documentation>Peak area falling in all buckets summed over all scans in XIC peak. Maps: CQuantCSDataMatch:m_totalIntensity</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="totalIntensity_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>totalIntensity as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="decimal_t">
+		<xs:annotation>
+			<xs:documentation>decimal value as string and base64 </xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="v" type="xs:double" use="required"/>
+		<xs:attribute name="v_b" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="quantFitexyStatus_t">
+		<xs:attribute name="sigx" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Std Dev for X co-ordinate</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="sigx_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>sigx as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="sigy" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Std Dev for Y co-ordinate </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="sigy_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>sigy as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="a" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Intercept</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="a_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>a as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="siga" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Std error on intercept</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="siga_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>siga as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="b" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Gradient </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="b_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>b as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="sigb" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Std error on gradient</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="sigb_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>sigb as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="chi2" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Chi squared for fit</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="chi2_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>chi2 as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="q" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Chi squared probabilty. The larger the value, the better the fit</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="q_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>q as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="quantValue_t">
+		<xs:annotation>
+			<xs:documentation>Maps: CQuantValue</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fitexy" type="mdq:quantFitexyStatus_t" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parameters and results from least squares fit with errors in both co-ordinates. Only populated for original ratios</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ratioStatus" type="mdq:quantRatioStatus_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Whether a peptide ratio is included or rejected when calculating a protein ratio.  CQuantValue::m_states</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ratio" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Display name of ratio</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="valid" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>Valid ratios are positive, non-infinite, non-zero. Maps: CQuantValue::m_valid</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="set" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>Original state of the selection checkbox Maps: CQuantValue::m_set</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="value" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Ratio value. Maps: CQuantValue::m_value</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="value_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>value as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="inc" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>Current tate of the selection checkbox. Maps: CQuantValue::m_include</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="quality" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Std. Err. = sigb / abs(b) from fitexy. Perfect fit is 0.0. Maps: CQuantValue:: m_quality</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="quality_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>quality as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="bold" type="xs:boolean" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation>Is value displayed in bold</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="quantHitValue_t">
+		<xs:annotation>
+			<xs:documentation>Maps: std::map&lt;long, CQuantValues*&gt;</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ratio" type="mdq:quantValue_t" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Data for each protein hit to which the peptide match is assigned. Maps: m_hit2ratios </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="hitNumber" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>Protein hit number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="quantDataMatch_t">
+		<xs:annotation>
+			<xs:documentation>Maps: CQuantDataMatch class. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="partner" type="mdq:quantDataEntry_t" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Component level data. Maps: CQuantDataMatch::m_data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="correctionMatrixJI" type="mdq:decimalMatrix_t">
+				<xs:annotation>
+					<xs:documentation>The correction matrix A, product of J (averagine) and I (impurity) Maps: CQuantDataMatch::m_matA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="inverseOfJI" type="mdq:decimalMatrix_t">
+				<xs:annotation>
+					<xs:documentation>Inverse of Matrix A Maps: CQuantDataMatch::m_matInvA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="predictionMatrix" type="mdq:decimalMatrix_t">
+				<xs:annotation>
+					<xs:documentation>Predicted stick spectrum for equal amounts of each component. Maps: CQuantDataMatch::m_matPredict</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="perfectObservedSpectrum" type="mdq:decimalMatrix_t">
+				<xs:annotation>
+					<xs:documentation>Predicted stick spectrum measured amounts of each component. m/z values are in calcMoverZ. Maps: CQuantDataMatch::m_matPerfectProfile</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="calcMoverZ" type="mdq:decimalMatrix_t">
+				<xs:annotation>
+					<xs:documentation>Calculated m/z values for perfectObservedSpectrum</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chargeStateData" type="mdq:quantCSDataMatch_t">
+				<xs:annotation>
+					<xs:documentation>XIC level data. Maps: CQuantDataMatch::m_cs_data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="originalRatio" type="mdq:quantValue_t" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Peptide ratio data that is independent of the assigned protein hit. To find out whether a match has been accepted or rejected under a particular protein hit, need to look under hitRatios. Maps: CQuantDataMatch::m_original_ratios</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hitRatios" type="mdq:quantHitValue_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Peptide ratio data tabulated by protein hit. Will be identical to originalRatio except for set and inc, which can differ.  Maps: CQuantDataMatch::m_hit2ratios</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Primary key (zero based)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="pepStr" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Peptide sequence in 1 letter code</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="varMods" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Variable modifications encoded as string of integers</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="firstXICscanID" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>First scan of all the scans processed in the search for an XIC peak. Can be a wide region. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="lastXICscanID" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Last scan of all the scans processed in the search for an XIC peak. Can be a wide region. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="chargeState" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Peptide charge state</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="displayIntensity" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Total intensity of fitted peaks across XIC peak</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="displayIntensity_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>displayIntensity as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="chargeType" type="mdq:matchCharge_t" use="required">
+			<xs:annotation>
+				<xs:documentation>Whether this charge state has been extrapolated from the charge state of a Mascot match</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="readableVarmodStr" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Variable modifications as comma separated text string</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="XICEntry_t">
+		<xs:annotation>
+			<xs:documentation>Extra information about XIC incl rt and scanid</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="rt" type="xs:double" use="optional">
+			<xs:annotation>
+				<xs:documentation>RT in seconds</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="scanid" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>Scan number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="v" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Intensity</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="v_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>v as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="oneXIC_t">
+		<xs:annotation>
+			<xs:documentation>Maps: COneXIC class.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="intensity" type="mdq:XICEntry_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>XIC profile from XICStart to XICEnd. Maps: COneXIC::m_intensities</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="peakState" type="mdq:peakStatus_t" use="required">
+			<xs:annotation>
+				<xs:documentation>Set to ok if XIC peak found. Maps: COneXIC::m_peakState</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="XICPeakStart" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>First scan of XIC peak. Region shaded purple in Distilller. Maps: COneXIC::m_XICPeakStart</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="XICPeakEnd" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Last scan of XIC peak. Region shaded purple in Distilller. Maps: COneXIC::m_XICPeakEnd</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="XICRegionStart" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Range slightly widened from the XIC peak to include a couple of baseline scans on either side. Maps: COneXIC::m_XICRegionStart</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="XICRegionEnd" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Range slightly widened from the XIC peak to include a couple of baseline scans on either side. Maps: COneXIC::m_XICRegionEnd </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="XICStart" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>First scan of all the scans processed in the search for an XIC peak. Can be a wide region. Maps: COneXIC::m_XICStart</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="XICEnd" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Last scan of all the scans processed in the search for an XIC peak. Can be a wide region. Maps: COneXIC::m_XICEnd</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="peakStatus_t">
+		<xs:annotation>
+			<xs:documentation>Maps: typedef enum states_e</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="unknown">
+				<xs:annotation>
+					<xs:documentation>statusUnknown</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ok">
+				<xs:annotation>
+					<xs:documentation>statusOK</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="discard">
+				<xs:annotation>
+					<xs:documentation>statusDiscard</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="rangeInfo_t">
+		<xs:attribute name="rt" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>RT in seconds</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="scan" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Scan number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="quantDataEntry_t">
+		<xs:annotation>
+			<xs:documentation>Maps: CQuantDataEntry</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="xic" type="mdq:oneXIC_t">
+				<xs:annotation>
+					<xs:documentation>XIC data for this component. Maps: CQuantDataEntry::m_xic</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="range" type="mdq:rangeInfo_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>RT value or range for Mascot match(es), if any</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="absoluteValue" type="mdq:quantValue_t">
+				<xs:annotation>
+					<xs:documentation>Only the value and value_b attributes are used to store summed intensity values for this component across the XIC peak. Required for normalisation. (N.B. ignore annotation of value attribute, which does not apply here) Maps: CQuantDataEntry::m_AbsValue</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="matches" type="mdq:queryRank_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Mascot matches for this component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="component" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Name of component </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="partnerIdentified" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>True if there is a Mascot match for this component. False means component identified from m/z and elution time</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="peptideString" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Peptide sequence as 1 letter code</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="labelFreeVariableModifications" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Variable modifications defined at search form or method level. That is, excluding modifications that define component membership. Encoded as string of integers</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="mOverZ" type="xs:double" use="optional">
+			<xs:annotation>
+				<xs:documentation>Calculated m/z</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="queryRank_t">
+		<xs:annotation>
+			<xs:documentation>Maps: lstpair - used in CQuantDataEntry::m_matches</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="query" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Mascot query number (1 based)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="rank" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Mascot rank (1 is highest scoring match)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="proteinRatio_t">
+		<xs:annotation>
+			<xs:documentation>Maps: CQuantProteinRatio</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ratioName" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Display name ratio</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="hit" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Protein hit number - 1 based. Maps: CQuantHitProtRatio::hit</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ratio" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Ratio value. Maps: CQuantProteinRatio::m_ratio</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ratio_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>ratio as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="stdDev" type="xs:double" use="optional">
+			<xs:annotation>
+				<xs:documentation>Geometric standard deviation of the selected peptide ratios. Maps: CQuantProteinRatio::m_sd</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="stdDev_b" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>stdDev as base64</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="numPeptides" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Number of peptide ratios selectedto calculate the protein ratio. Maps: CQuantProteinRatio::m_count</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="bold" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>A rato is bold if it is significantly different from unity (p &lt; 0.05). Maps: CQuantProteinRatio::m_bold</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="valid" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>False if no protein ratio reported because number of peptide ratios below minimum. Maps: CQuantProteinRatio::m_valid</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="proteinHit_t">
+		<xs:sequence>
+			<xs:element name="reftoPeptideMatch" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Peptide matches assigned to this protein using key of peptideMatch/@id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="proteinRatio" type="mdq:proteinRatio_t" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Protein ratio data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="hit" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Hit number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="showInReport">
+			<xs:annotation>
+				<xs:documentation>Not used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="accession" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Accession string</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="score" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Mascot score</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="mass" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Protein mass</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="descr" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Protein description</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="peptide_t">
+		<xs:sequence>
+			<xs:element name="queryRank" type="mdq:queryRank_t">
+				<xs:annotation>
+					<xs:documentation>Identify Mascot peptide match by query and rank</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="mrCalc" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Calculated relative molecular mass, Mr(Calc)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="obs" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Observed m/z</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="delta" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Mr(expt) - Mr(calc)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="score" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation>Mascot ions score</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="component" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Assigned component</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="peptideStr" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Peptide sequence as 1 letter code</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="varModsStr" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Variable modifications encoded as string of integers</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="averageSpecific_t">
+		<xs:attribute name="referenceHit" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>reference hit number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="refSelectedByUser" type="xs:boolean" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation>Is reference protein selected by user or Distiller</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		
+	</xs:complexType>
+</xs:schema>

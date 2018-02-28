@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	@(#)$Source: /vol/cvsroot/parser/xml/schema/mascot_security_1_0.xsd,v $
+	@(#)$Revision: 1.2 $
+	@(#)$Name:  $
+-->
+<xsd:schema 
+	xmlns:mss="http://www.matrixscience.com/xmlns/schema/mascot_security_1_0"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.matrixscience.com/xmlns/schema/mascot_security_1_0"
+	elementFormDefault="qualified">
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en-GB">
+        Xml-schema used by msparser to validate all security-related xml-documents. 
+        Client application should supply explicit location of this document in order to use msparser security API.
+        </xsd:documentation>
+    </xsd:annotation>
+
+<!-- Version validation elements -->
+    <xsd:simpleType name="majorVersion_t">
+        <xsd:restriction base="xsd:unsignedShort">
+            <xsd:enumeration value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="minorVersion_t">
+        <xsd:restriction base="xsd:unsignedShort">
+            <xsd:maxInclusive value="1" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+<!-- Top-level elements definitions -->
+    <xsd:element name="security_options" type="mss:security_options_t" />
+    <xsd:element name="security_tasks" type="mss:security_tasks_t" />
+    <xsd:element name="security_groups" type="mss:security_groups_t" />
+    <xsd:element name="security_users" type="mss:security_users_t" />
+    <xsd:element name="security_session" type="mss:security_session_t" />
+    
+    <xsd:complexType name="security_options_t">
+        <xsd:sequence>
+            <xsd:element name="options" type="mss:options_t" />
+        </xsd:sequence>
+        <xsd:attribute name="majorVersion" type="mss:majorVersion_t" use="required" />
+        <xsd:attribute name="minorVersion" type="mss:minorVersion_t" use="required" />
+    </xsd:complexType>
+    
+    <xsd:complexType name="security_tasks_t">
+        <xsd:sequence>
+            <xsd:element name="tasks" type="mss:tasks_list_t" />
+        </xsd:sequence>
+        <xsd:attribute name="majorVersion" type="mss:majorVersion_t" use="required" />
+        <xsd:attribute name="minorVersion" type="mss:minorVersion_t" use="required" />
+    </xsd:complexType>
+    
+    <xsd:complexType name="security_groups_t">
+        <xsd:sequence>
+            <xsd:element name="last_groupID" type="xsd:integer" />
+            <xsd:element name="all_groups" type="mss:groups_list_t" />
+        </xsd:sequence>
+        <xsd:attribute name="majorVersion" type="mss:majorVersion_t" use="required" />
+        <xsd:attribute name="minorVersion" type="mss:minorVersion_t" use="required" />
+    </xsd:complexType>
+    
+    <xsd:complexType name="security_users_t">
+        <xsd:sequence>
+            <xsd:element name="last_userID" type="xsd:integer" />
+            <xsd:element name="all_users" type="mss:users_list_t" />
+        </xsd:sequence>
+        <xsd:attribute name="majorVersion" type="mss:majorVersion_t" use="required" />
+        <xsd:attribute name="minorVersion" type="mss:minorVersion_t" use="required" />
+    </xsd:complexType>
+    
+    <xsd:complexType name="security_session_t">
+        <xsd:sequence>
+            <xsd:element name="session_data" type="mss:session_data_t" />
+        </xsd:sequence>
+        <xsd:attribute name="majorVersion" type="mss:majorVersion_t" use="required" />
+        <xsd:attribute name="minorVersion" type="mss:minorVersion_t" use="required" />
+    </xsd:complexType>
+    
+<!-- Detailed types definitions -->
+
+    <xsd:complexType name="options_t">
+        <xsd:sequence>
+            <xsd:element name="securityEnabled" type="xsd:string" />
+            <xsd:element name="sessionTimeout" type="xsd:unsignedLong" />
+            <xsd:element name="defaultPasswordExpiryTime" type="xsd:unsignedLong" />
+            <xsd:element name="minimumPasswordLength" type="xsd:unsignedInt" />
+            <xsd:element name="useSessionCookies" type="xsd:string" />
+            <xsd:element name="verifySessionIPAddress" type="xsd:string" />
+            <xsd:element name="integraAppServerURL" type="xsd:string" />
+            <xsd:element name="integraDatabaseName" type="xsd:string" />
+            <xsd:element name="integraOracleServerName" type="xsd:string" />
+            <xsd:element name="logLevel" type="xsd:integer" />
+            <xsd:element name="logFileName" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="task_t">
+        <xsd:sequence>
+            <xsd:element name="task_id" type="xsd:integer" />
+            <xsd:element name="short_desc" type="xsd:string" />
+            <xsd:element name="long_desc" type="xsd:string" />
+            <xsd:element name="task_name" type="xsd:string" />
+            <xsd:element name="type" type="xsd:integer" />
+            <xsd:element name="values_array" type="mss:values_array_t" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="group_data_t">
+        <xsd:sequence>
+            <xsd:element name="group_id" type="xsd:integer" />
+            <xsd:element name="group_name" type="xsd:string" />
+            <xsd:element name="users" type="mss:users_id_list_t" />
+            <xsd:element name="permitted_tasks" type="mss:tasks_list_t" />
+            <xsd:element name="custom_parameters" type="mss:parameters_list_t" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="user_data_t">
+        <xsd:sequence>
+            <xsd:element name="userID" type="xsd:integer" />
+            <xsd:element name="userName" type="xsd:string" />
+            <xsd:element name="fullName" type="xsd:string" />
+            <xsd:element name="encryptedPassword" type="xsd:string" />
+            <xsd:element name="passwordExpiry" type="xsd:unsignedLong" />
+            <xsd:element name="emailAddress" type="xsd:string" />
+            <xsd:element name="accountEnabled" type="xsd:string" />
+            <xsd:element name="userType" type="xsd:integer" />
+            <xsd:element name="custom_parameters" type="mss:parameters_list_t" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="session_data_t">
+        <xsd:sequence>
+            <xsd:element name="emailAddress" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="fullUserName" type="xsd:string" minOccurs="0" />
+            <xsd:element name="ipAddress" type="xsd:string" minOccurs="0" />
+            <xsd:element name="lastAccessed" type="xsd:unsignedLong" />
+            <xsd:element name="securityEnabled" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="timeout" type="xsd:unsignedLong" />
+            <xsd:element name="userID" type="xsd:integer" minOccurs="0" />
+            <xsd:element name="userName" type="xsd:string" minOccurs="0" />
+            <xsd:element name="userType" type="xsd:integer" minOccurs="0" />
+            <xsd:element name="verifyAddress" type="xsd:string" minOccurs="0" />
+            <xsd:element name="custom_parameters" type="mss:parameters_list_t" />
+            <xsd:element name="permitted_tasks" type="mss:tasks_list_t" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="param_t">
+        <xsd:sequence>
+            <xsd:element name="paramName" type="xsd:string" />
+            <xsd:element name="paramValue" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+<!-- Lists and arrays. First, lists of simple data type elements. -->
+
+    <xsd:complexType name="values_array_t">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="value" type="xsd:string" />
+        </xsd:choice>
+    </xsd:complexType>
+    
+    <xsd:complexType name="users_id_list_t">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="user_id" type="xsd:integer" />
+        </xsd:choice>
+    </xsd:complexType>
+    
+<!-- Now go the lists of complex objects -->
+
+    <xsd:complexType name="tasks_list_t" >
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="task" type="mss:task_t" />
+        </xsd:choice>
+    </xsd:complexType>
+    
+    <xsd:complexType name="groups_list_t">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="group_data" type="mss:group_data_t" />
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="users_list_t">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="user_data" type="mss:user_data_t" />
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="parameters_list_t">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="param" type="mss:param_t" />
+        </xsd:choice>
+    </xsd:complexType>
+   
+</xsd:schema>

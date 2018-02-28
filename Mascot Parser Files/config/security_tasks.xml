@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<mss:security_tasks xmlns:mss="http://www.matrixscience.com/xmlns/schema/mascot_security_1_0" majorVersion="1" minorVersion="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.matrixscience.com/xmlns/schema/mascot_security_1_0 ../config/mascot_security_1_0.xsd">
+
+  <mss:tasks>
+    <mss:task>
+      <mss:task_id>1</mss:task_id>
+      <mss:short_desc>SEARCH: Allow pmf searches</mss:short_desc>
+      <mss:long_desc>Unless this is set, the user will not be able to perform any peptide mass fingerprint searches.</mss:long_desc>
+      <mss:task_name>SECTASK_ALLOWPMF</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>2</mss:task_id>
+      <mss:short_desc>SEARCH: Allow ms-ms (and SQ) searches</mss:short_desc>
+      <mss:long_desc>Unless this is set, the user will not be able to perform any ms-ms or sequence tag searches.</mss:long_desc>
+      <mss:task_name>SECTASK_ALLOWMSMS</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>3</mss:task_id>
+      <mss:short_desc>SEARCH: Allow msms no enzyme searches</mss:short_desc>
+      <mss:long_desc>Unless this is set, the user will not be able to perform any no enzyme searches on ms-ms or sequence tag data.</mss:long_desc>
+      <mss:task_name>SECTASK_ALLOWMSMSNOENZYME</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>4</mss:task_id>
+      <mss:short_desc>SEARCH: Allow no enzyme pmf searches</mss:short_desc>
+      <mss:long_desc>Unless this is set, the user will not be able to perform any no enzyme searches on pmf data. It is not usually sensible to perform such searches.</mss:long_desc>
+      <mss:task_name>SECTASK_ALLOWPMFNOENZYME</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>5</mss:task_id>
+      <mss:short_desc>SEARCH: Maximum number of concurrent searches per ip address</mss:short_desc>
+      <mss:long_desc>This can be used to decrease (but not increase) the default setting in mascot.dat.</mss:long_desc>
+      <mss:task_name>SECTASK_MAXCONCURRENTSEARCHES</mss:task_name>
+      <mss:type>2</mss:type>
+      <mss:values_array>
+        <mss:value>0</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>6</mss:task_id>
+      <mss:short_desc>SEARCH: Maximum mascot search job priority</mss:short_desc>
+      <mss:long_desc>Job priority can either be changed from the status screen, or from Mascot Daemon. Priority is in the range -10 to +10.</mss:long_desc>
+      <mss:task_name>SECTASK_MAXJOBPRIORITY</mss:task_name>
+      <mss:type>2</mss:type>
+      <mss:values_array>
+        <mss:value>0</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>7</mss:task_id>
+      <mss:short_desc>SEARCH: Maximum number of queries per search</mss:short_desc>
+      <mss:long_desc>This overrides the default setting in mascot.dat - either above or below that value.</mss:long_desc>
+      <mss:task_name>SECTASK_MAXQUERIES</mss:task_name>
+      <mss:type>2</mss:type>
+      <mss:values_array>
+        <mss:value>0</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>8</mss:task_id>
+      <mss:short_desc>SEARCH: Maximum execution time</mss:short_desc>
+      <mss:long_desc>This is the maximum elapsed time in seconds - it is not the maximum cpu time, and therefore will be affected by how busy the server is.</mss:long_desc>
+      <mss:task_name>SECTASK_MAXEXECUTIONTIME</mss:task_name>
+      <mss:type>2</mss:type>
+      <mss:values_array>
+        <mss:value>0</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>9</mss:task_id>
+      <mss:short_desc>SEARCH: Allow all fasta databases to be searched</mss:short_desc>
+      <mss:long_desc>By default no databases may be searched.</mss:long_desc>
+      <mss:task_name>SECTASK_ALLFASTA</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>10</mss:task_id>
+      <mss:short_desc>SEARCH: Special fasta databases that override the default setting</mss:short_desc>
+      <mss:long_desc>If 'Allow all fasta databases to be searched' is set, then all databases except those listed here can be searched. If 'Allow all fasta databases to be searched' is not included, then only databases listed here can be searched. Enter a list of database names separated by commas - e.g. MSDB, NCBInr</mss:long_desc>
+      <mss:task_name>SECTASK_NAMEDFASTA</mss:task_name>
+      <mss:type>10</mss:type>
+      <mss:values_array></mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>11</mss:task_id>
+      <mss:short_desc>SEARCH: Maximum variable modifications for standard searches</mss:short_desc>
+      <mss:long_desc>The maximum number of variable modifications allowed for a standard search. Must be a number between 1 and 32</mss:long_desc>
+      <mss:task_name>SECTASK_MAXVARMODS</mss:task_name>
+      <mss:type>2</mss:type>
+      <mss:values_array></mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>12</mss:task_id>
+      <mss:short_desc>SEARCH: Maximum variable modifications for error tolerant searches</mss:short_desc>
+      <mss:long_desc>This applies to both the original style error tolerant search and the new combined style error tolerant search. The value may be different from the number allowed for a normal search. The limit must be between 0 and 31.</mss:long_desc>
+      <mss:task_name>SECTASK_MAXETVARMODS</mss:task_name>
+      <mss:type>2</mss:type>
+      <mss:values_array></mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>13</mss:task_id>
+      <mss:short_desc>VIEW: See search results from other people in your own group</mss:short_desc>
+      <mss:long_desc>You can see your own search results without any special permissions. Adding this task allows a user to see searches submitted by other users who belong to the same group.</mss:long_desc>
+      <mss:task_name>SECTASK_SEESEARCHINGROUP</mss:task_name>
+      <mss:type>11</mss:type>
+      <mss:values_array></mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>14</mss:task_id>
+      <mss:short_desc>VIEW: See all search results with a USERID</mss:short_desc>
+      <mss:long_desc>Adding this task allows a member of the group to see any search results that have a (non-zero) user ID. Searches without a USERID (prior to Mascot 2.1) or searches where security is disabled cannot be viewed.</mss:long_desc>
+      <mss:task_name>SECTASK_SEEALLSEARCHESWITHUSERID</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>15</mss:task_id>
+      <mss:short_desc>VIEW: See search results without USERID field</mss:short_desc>
+      <mss:long_desc>Adding this task allows a member of the group to see any search results that don't have a USERID (i.e. searches prior to Mascot 2.1) or searches with USERID=0 (Security Disabled).</mss:long_desc>
+      <mss:task_name>SECTASK_SEEOLDSEARCHES</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>16</mss:task_id>
+      <mss:short_desc>VIEW: Allow user to view the search log</mss:short_desc>
+      <mss:long_desc>Allow user to view the search log. They may not be able to view other searches depending on other VIEW: tasks.</mss:long_desc>
+      <mss:task_name>SECTASK_USEMSREVIEWEXE</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>17</mss:task_id>
+      <mss:short_desc>GENERAL: View config files using ms-status</mss:short_desc>
+      <mss:long_desc>This is a basic requirement for client applications. Adding this task allows client applications to read the configuration files such as the mod_file, enzymes file and mascot.dat.</mss:long_desc>
+      <mss:task_name>SECTASK_VIEWCONFIGUSINGMSSTATUS</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>18</mss:task_id>
+      <mss:short_desc>GENERAL: Allow user to modify their own profile</mss:short_desc>
+      <mss:long_desc>Allow user to modify their own profile. For example, allow them to change their email address.</mss:long_desc>
+      <mss:task_name>SECTASK_MODIFYOWNPROFILE</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>19</mss:task_id>
+      <mss:short_desc>CLIENT: Mascot Daemon is allowed to submit searches</mss:short_desc>
+      <mss:long_desc>Mascot Daemon is allowed to submit searches. Without this, Mascot Daemon cannot connect to the Mascot server.</mss:long_desc>
+      <mss:task_name>SECTASK_DAEMONCLIENT</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>20</mss:task_id>
+      <mss:short_desc>CLIENT: Mascot Distiller is allowed to submit searches</mss:short_desc>
+      <mss:long_desc>Mascot Distiller is allowed to submit searches. Without this, Mascot Distiller cannot connect to the Mascot server.</mss:long_desc>
+      <mss:task_name>SECTASK_DISTILLERCLIENT</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>22</mss:task_id>
+      <mss:short_desc>CLIENT: For Mascot Daemon, allow spoofing of another user</mss:short_desc>
+      <mss:long_desc>For Mascot Daemon, allow the submission of searches on behalf of other users. Also implies that the user can call get_params.pl?Show=MS_USERS.</mss:long_desc>
+      <mss:task_name>SECTASK_ALLOWSPOOFOTHERUSER</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>24</mss:task_id>
+      <mss:short_desc>CLIENT: Bruker BioTools batch searches</mss:short_desc>
+      <mss:long_desc>Allows Bruker BioTools users to submit batch searches. BioTools 3.1 and later.</mss:long_desc>
+      <mss:task_name>SECTASK_BIOTOOLSBATCH</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>25</mss:task_id>
+      <mss:short_desc>CLIENT: For Mascot Daemon, restrict spoofing to the named group(s)</mss:short_desc>
+      <mss:long_desc>Requires SECTASK_ALLOWSPOOFOTHERUSER to be specified. For Mascot Daemon, allow the submission of searches on behalf of a controlled list of other users. Implies that the user can call get_params.pl?Show=MS_USERS.</mss:long_desc>
+      <mss:task_name>SECTASK_SPOOFNAMEDGROUPSONLY</mss:task_name>
+      <mss:type>10</mss:type>
+      <mss:values_array></mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>26</mss:task_id>
+      <mss:short_desc>CLIENT: Client is allowed to download Distiller XML files</mss:short_desc>
+      <mss:long_desc></mss:long_desc>
+      <mss:task_name>SECTASK_DOWNLOAD_DISTILLER_XML</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>27</mss:task_id>
+      <mss:short_desc>CLIENT: Client is allowed to upload Distiller XML files</mss:short_desc>
+      <mss:long_desc></mss:long_desc>
+      <mss:task_name>SECTASK_UPLOAD_DISTILLER_XML</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+
+    <mss:task>
+      <mss:task_id>30</mss:task_id>
+      <mss:short_desc>ADMIN: Use the security administration utility</mss:short_desc>
+      <mss:long_desc>Allows access to the security administration utility. This allows the user to add/delete/edit users and groups, so this should only be added to the administrators group.</mss:long_desc>
+      <mss:task_name>SECTASK_ADMINPAGES</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>31</mss:task_id>
+      <mss:short_desc>ADMIN: Access to the Database Maintenance application</mss:short_desc>
+      <mss:long_desc>Access to the utility for adding and configuring sequence databases.</mss:long_desc>
+      <mss:task_name>SECTASK_ACCESSDBSETUP</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>32</mss:task_id>
+      <mss:short_desc>ADMIN: Allow use of Database Status application</mss:short_desc>
+      <mss:long_desc>View the status of all the sequence databases. Links to database statistics, search status, log files, etc. Also has links to currently running and recently run searches.</mss:long_desc>
+      <mss:task_name>SECTASK_USEMSSTATUSEXE</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>33</mss:task_id>
+      <mss:short_desc>ADMIN: Allow user to see cluster pages in ms-status.exe</mss:short_desc>
+      <mss:long_desc>Administrators may want users to see all their current searches but not want them to see the cluster setup.</mss:long_desc>
+      <mss:task_name>SECTASK_MSSTATUSEXECLUSTER</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>34</mss:task_id>
+      <mss:short_desc>ADMIN: Allow user to retry a failed database or recompress files using ms-status.exe</mss:short_desc>
+      <mss:long_desc>If a database fails to come on line, then the link that displays the 'restart' will be displayed. Also displays the link to recompress a database.</mss:long_desc>
+      <mss:task_name>SECTASK_MSSTATUSEXERETRYDB</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>35</mss:task_id>
+      <mss:short_desc>ADMIN: Kill / pause / change priority of searches from own group</mss:short_desc>
+      <mss:long_desc>Requires 'Allow use of Database Status application'. Adding this task to the group then allows the user to kill / pause / change priority of other peoples searches as long as they also belong to this group.</mss:long_desc>
+      <mss:task_name>SECTASK_KILLTASKINGROUP</mss:task_name>
+      <mss:type>11</mss:type>
+      <mss:values_array></mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>36</mss:task_id>
+      <mss:short_desc>ADMIN: Kill / pause / change priority of searches from other groups</mss:short_desc>
+      <mss:long_desc>Requires 'Allow use of Database Status application'. Adding this task to the group then allows the user to kill / pause / change priority of any other peoples searches.</mss:long_desc>
+      <mss:task_name>SECTASK_KILLALLTASK</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>37</mss:task_id>
+      <mss:short_desc>ADMIN: Access to the configuration editor to view configuration files</mss:short_desc>
+      <mss:long_desc>Allows the user to view, but not edit the configurations files (enzymes, masses, modifications), using the configuration editor supplied with Mascot 2.2 and later.</mss:long_desc>
+      <mss:task_name>SECTASK_VIEWCONFIG</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    <mss:task>
+      <mss:task_id>38</mss:task_id>
+      <mss:short_desc>ADMIN: Access to the configuration editor to edit configuration files</mss:short_desc>
+      <mss:long_desc>Allows the user to view and edit the configurations files (enzymes, masses, modifications), using the configuration editor supplied with Mascot 2.2 and later.</mss:long_desc>
+      <mss:task_name>SECTASK_EDITCONFIG</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>50</mss:task_id>
+      <mss:short_desc>SEARCH: Maximum proteins for old style error tolerant searches</mss:short_desc>
+      <mss:long_desc>Maximum number of accessions allowed in an old style error tolerant search. Does not affect the new combined error tolerant search introduced in Mascot version 2.2</mss:long_desc>
+      <mss:task_name>SECTASK_MAXETACCESSIONS</mss:task_name>
+      <mss:type>2</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>51</mss:task_id>
+      <mss:short_desc>SEARCH: Maximum number of queries for a no enzyme search</mss:short_desc>
+      <mss:long_desc>This overrides the setting for SECTASK_MAXQUERIES and the default setting in mascot.dat - either above or below those value.</mss:long_desc>
+      <mss:task_name>SECTASK_MAXNOENZQUERIES</mss:task_name>
+      <mss:type>2</mss:type>
+      <mss:values_array>
+        <mss:value>0</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>52</mss:task_id>
+      <mss:short_desc>SEARCH: Maximum number of fasta files in a single search</mss:short_desc>
+      <mss:long_desc>For Mascot 2.3 and later where multiple fasta files can be selected in a single search</mss:long_desc>
+      <mss:task_name>SECTASK_MAXFASTAFILES</mss:task_name>
+      <mss:type>2</mss:type>
+      <mss:values_array>
+        <mss:value>0</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>53</mss:task_id>
+      <mss:short_desc>SEARCH: Prevent the use of quantitation methods in a search</mss:short_desc>
+      <mss:long_desc>Prevent a member of a group from using a quantitation method in a search</mss:long_desc>
+      <mss:task_name>SECTASK_DENYQUANT</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>54</mss:task_id>
+      <mss:short_desc>SEARCH: Allow submitting searches with DATAURL parameter</mss:short_desc>
+      <mss:long_desc>Allow submitting searches with DATAURL pointing to the input file of the search. Only protocols listed here (http, ftp, file) are allowed. If the list is empty, DATAURL is not allowed. </mss:long_desc>
+      <mss:task_name>SECTASK_DATAURLPROTOCOLS</mss:task_name>
+      <mss:type>10</mss:type>
+      <mss:values_array></mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>55</mss:task_id>
+      <mss:short_desc>SEARCH: Maximum number of megabytes to download for DATAURL</mss:short_desc>
+      <mss:long_desc>If the search requires downloading an external file as input (DATAURL), Mascot will download the whole file by default. This task allows limiting the number of megabytes to download. DATAURLs exceeding the limit cause the search to fail with an error.</mss:long_desc>
+      <mss:task_name>SECTASK_DATAURLMAXSIZE</mss:task_name>
+      <mss:type>2</mss:type>
+      <mss:values_array>
+        <mss:value>0</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>60</mss:task_id>
+      <mss:short_desc>VIEW: See search results from any user in any group you belong to</mss:short_desc>
+      <mss:long_desc>Allows viewing of searches from members of other groups without the SECTASK_SEESEARCHINGROUP task</mss:long_desc>
+      <mss:task_name>SECTASK_SEESEARCHINANYGROUP</mss:task_name>
+      <mss:type>12</mss:type>
+      <mss:values_array></mss:values_array>
+    </mss:task>
+
+   
+    <mss:task>
+      <mss:task_id>100</mss:task_id>
+      <mss:short_desc>INSIGHT: Access to Mascot Insight</mss:short_desc>
+      <mss:long_desc>Enables a member of a group to log into and use the Mascot Insight application</mss:long_desc>
+      <mss:task_name>MISECTASK_ACCESS</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>101</mss:task_id>
+      <mss:short_desc>INSIGHT: Protein approval in Mascot Insight</mss:short_desc>
+      <mss:long_desc>Allows the user to approve and unapprove protein matches in Mascot Insight</mss:long_desc>
+      <mss:task_name>MISECTASK_PROTEINAPPROVAL</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+     <mss:task>
+      <mss:task_id>102</mss:task_id>
+      <mss:short_desc>INSIGHT: Add import assignment filter</mss:short_desc>
+      <mss:long_desc>Allows the user to add a result import assignment filter to Mascot Insight</mss:long_desc>
+      <mss:task_name>MISECTASK_ADDIMPORTFILTER</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    
+    <mss:task>
+      <mss:task_id>103</mss:task_id>
+      <mss:short_desc>INSIGHT: Mascot Insight administration functions</mss:short_desc>
+      <mss:long_desc>Enables access to the Mascot Insight administration pages and functions</mss:long_desc>
+      <mss:task_name>MISECTASK_ADMIN</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    
+    <mss:task>
+      <mss:task_id>104</mss:task_id>
+      <mss:short_desc>INSIGHT: Add custom report to Mascot Insight</mss:short_desc>
+      <mss:long_desc>Allows the user to add a custom report class to Mascot Insight</mss:long_desc>
+      <mss:task_name>MISECTASK_ADDCUSTOMREPORT</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    
+    <mss:task>
+      <mss:task_id>105</mss:task_id>
+      <mss:short_desc>INSIGHT: Delete custom report Mascot Insight</mss:short_desc>
+      <mss:long_desc>Allows the user to delete a custom report class from Mascot Insight</mss:long_desc>
+      <mss:task_name>MISECTASK_DELETECUSTOMREPORT</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+    
+    <mss:task>
+      <mss:task_id>106</mss:task_id>
+      <mss:short_desc>INSIGHT: Add BlastCluster exclusion file</mss:short_desc>
+      <mss:long_desc>Allows the user to add a FASTA sequence exclusion file for use with BlastCluster in Mascot Insight</mss:long_desc>
+      <mss:task_name>MISECTASK_ADDEXCLUSIONFILE</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+
+    <mss:task>
+      <mss:task_id>107</mss:task_id>
+      <mss:short_desc>INSIGHT: Delete BlastCluster exclusion file</mss:short_desc>
+      <mss:long_desc>Allows the user to delete a FASTA sequence exclusion file from Mascot Insight</mss:long_desc>
+      <mss:task_name>MISECTASK_DELETEEXCLUSIONFILE</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+        
+    <mss:task>
+      <mss:task_id>108</mss:task_id>
+      <mss:short_desc>INSIGHT: Send notification</mss:short_desc>
+      <mss:long_desc>Allows the user to send a notification to any other user or group of users</mss:long_desc>
+      <mss:task_name>MISECTASK_SENDNOTIFICATION</mss:task_name>
+      <mss:type>0</mss:type>
+      <mss:values_array>
+        <mss:value>true</mss:value>
+      </mss:values_array>
+    </mss:task>
+  </mss:tasks>
+</mss:security_tasks>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	@(#)$Source: /vol/cvsroot/parser/xml/schema/specificity_visibility_1_0.xsd,v $
+	@(#)$Revision: 1.2 $
+	@(#)$Name:  $
+-->
+<xsd:schema 
+	xmlns:msv="http://www.matrixscience.com/xmlns/schema/specificity_visibility_1_0"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.matrixscience.com/xmlns/schema/specificity_visibility_1_0"
+	elementFormDefault="qualified">
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en-GB">
+        Xml-schema used by msparser to validate all specificity visibility information xml-documents. 
+        </xsd:documentation>
+    </xsd:annotation>
+
+<!-- Version validation elements -->
+    <xsd:simpleType name="majorVersion_t">
+        <xsd:restriction base="xsd:unsignedShort">
+            <xsd:enumeration value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="minorVersion_t">
+        <xsd:restriction base="xsd:unsignedShort">
+            <xsd:maxInclusive value="1" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+<!-- Top-level elements definitions -->
+
+    <xsd:element name="specificity_visibility" type="msv:specificity_visibility_t" />
+    
+    <xsd:complexType name="specificity_visibility_t">
+        <xsd:sequence>
+            <xsd:element name="modifications" type="msv:modifications_list_t" />
+        </xsd:sequence>
+        <xsd:attribute name="majorVersion" type="msv:majorVersion_t" use="required" />
+        <xsd:attribute name="minorVersion" type="msv:minorVersion_t" use="required" />
+    </xsd:complexType>
+    
+<!-- Detailed types definitions -->
+
+    <xsd:complexType name="modification_t">
+        <xsd:sequence>
+            <xsd:element name="title" type="xsd:string" />
+            <xsd:element name="isPrivate" type="xsd:boolean" />
+            <xsd:element name="specificities" type="msv:specs_list_t" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="specificity_t">
+        <xsd:sequence>
+            <xsd:element name="site" type="xsd:string" />
+            <xsd:element name="position" type="xsd:string" minOccurs="0" />
+            <xsd:element name="showInShortList" type="xsd:boolean" />
+            <xsd:element name="showInLongList" type="xsd:boolean" />
+            <xsd:element name="useInErrorTolerant" type="xsd:boolean" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+<!-- Now go the lists of complex objects -->
+
+    <xsd:complexType name="modifications_list_t" >
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="modification" type="msv:modification_t" />
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="specs_list_t" >
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="specificity" type="msv:specificity_t" />
+        </xsd:choice>
+    </xsd:complexType>
+  
+   
+</xsd:schema>

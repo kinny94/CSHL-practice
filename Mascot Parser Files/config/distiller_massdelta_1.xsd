@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dmd="http://www.matrixscience.com/xmlns/schema/distiller_massdelta_1" targetNamespace="http://www.matrixscience.com/xmlns/schema/distiller_massdelta_1" elementFormDefault="qualified">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en-GB">
+				This schema is for serialization of Distiller Mass deltas..
+				</xsd:documentation>
+	</xsd:annotation>
+	<xsd:simpleType name="minorVersion_t">
+		<xsd:restriction base="xsd:unsignedShort">
+			<xsd:maxInclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="distillerMassdelta" type="dmd:distillerMassdelta_t"/>
+	<xsd:complexType name="distillerMassdelta_t">
+		<xsd:sequence>
+			<xsd:element name="massdeltas" type="dmd:massdeltas_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="majorVersion" type="xsd:unsignedShort" use="required" fixed="1"/>
+		<xsd:attribute name="minorVersion" type="dmd:minorVersion_t" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="massDeltaElement_t">
+		<xsd:attribute name="Delta" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="massdeltas_t">
+		<xsd:sequence>
+			<xsd:element name="Delta" type="dmd:massDeltaElement_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

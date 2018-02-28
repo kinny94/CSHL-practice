@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<quantitation majorVersion="1" minorVersion="0" xmlns="http://www.matrixscience.com/xmlns/schema/quantitation_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.matrixscience.com/xmlns/schema/quantitation_1 ../html/xmlns/schema/quantitation_1/quantitation_1.xsd">
+
+  <method constrain_search="false" description="No quantitation" min_num_peptides="2" name="None" protein_ratio_type="average" report_detail="true">
+    <protocol>
+      <null/>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="Applied Biosystems iTRAQ(TM) 4-plex" min_num_peptides="2" name="iTRAQ 4plex" protein_ratio_type="weighted" report_detail="true" require_bold_red="true">
+    <modifications mode="fixed">
+      <mod_file>iTRAQ4plex (N-term)</mod_file>
+      <mod_file>iTRAQ4plex (K)</mod_file>
+    </modifications>
+    <modifications mode="variable" name="iTRAQ_variable">
+      <mod_file>iTRAQ4plex (Y)</mod_file>
+    </modifications>
+    <component name="114">
+      <moverz average="114.1729" monoisotopic="114.110679"/>
+      <correction shift="-2" type="AB certificate">0.0</correction>
+      <correction shift="-1" type="AB certificate">1.0</correction>
+      <correction shift="1" type="AB certificate">5.9</correction>
+      <correction shift="2" type="AB certificate">0.2</correction>
+    </component>
+    <component name="115">
+      <moverz average="115.1663" monoisotopic="115.107714"/>
+      <correction shift="-2" type="AB certificate">0.0</correction>
+      <correction shift="-1" type="AB certificate">2.0</correction>
+      <correction shift="1" type="AB certificate">5.6</correction>
+      <correction shift="2" type="AB certificate">0.1</correction>
+    </component>
+    <component name="116">
+      <moverz average="116.1590" monoisotopic="116.111069"/>
+      <correction shift="-2" type="AB certificate">0.0</correction>
+      <correction shift="-1" type="AB certificate">3.0</correction>
+      <correction shift="1" type="AB certificate">4.5</correction>
+      <correction shift="2" type="AB certificate">0.1</correction>
+    </component>
+    <component name="117">
+      <moverz average="117.1516" monoisotopic="117.114424"/>
+      <correction shift="-2" type="AB certificate">0.1</correction>
+      <correction shift="-1" type="AB certificate">4.0</correction>
+      <correction shift="1" type="AB certificate">3.5</correction>
+      <correction shift="2" type="AB certificate">0.0</correction>
+    </component>
+    <report_ratio name="115/114">
+      <numerator_component coefficient="1.0" name="115"></numerator_component>
+      <denominator_component coefficient="1.0" name="114"></denominator_component>
+    </report_ratio>
+    <report_ratio name="116/114">
+      <numerator_component coefficient="1.0" name="116"></numerator_component>
+      <denominator_component coefficient="1.0" name="114"></denominator_component>
+    </report_ratio>
+    <report_ratio name="117/114">
+      <numerator_component coefficient="1.0" name="117"></numerator_component>
+      <denominator_component coefficient="1.0" name="114"></denominator_component>
+    </report_ratio>
+    <exclusion>iTRAQ_variable</exclusion>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <outliers method="auto"/>
+    <protocol>
+      <reporter/>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="Applied Biosystems iTRAQ(TM) 8-plex" min_num_peptides="2" name="iTRAQ 8plex" protein_ratio_type="weighted" report_detail="true" require_bold_red="true">
+    <modifications mode="fixed">
+      <mod_file>iTRAQ8plex (N-term)</mod_file>
+      <mod_file>iTRAQ8plex (K)</mod_file>
+    </modifications>
+    <modifications mode="variable" name="iTRAQ_variable">
+      <mod_file>iTRAQ8plex (Y)</mod_file>
+    </modifications>
+    <component name="113">
+      <moverz average="113.1803" monoisotopic="113.107324"/>
+      <correction shift="-2" type="AB certificate">0.00</correction>
+      <correction shift="-1" type="AB certificate">0.00</correction>
+      <correction shift="1" type="AB certificate">6.89</correction>
+      <correction shift="2" type="AB certificate">0.24</correction>
+    </component>
+    <component name="114">
+      <moverz average="114.1729" monoisotopic="114.110679"/>
+      <correction shift="-2" type="AB certificate">0.00</correction>
+      <correction shift="-1" type="AB certificate">0.94</correction>
+      <correction shift="1" type="AB certificate">5.90</correction>
+      <correction shift="2" type="AB certificate">0.16</correction>
+    </component>
+    <component name="115">
+      <moverz average="115.1663" monoisotopic="115.107714"/>
+      <correction shift="-2" type="AB certificate">0.00</correction>
+      <correction shift="-1" type="AB certificate">1.88</correction>
+      <correction shift="1" type="AB certificate">4.90</correction>
+      <correction shift="2" type="AB certificate">0.10</correction>
+    </component>
+    <component name="116">
+      <moverz average="116.1590" monoisotopic="116.111069"/>
+      <correction shift="-2" type="AB certificate">0.0</correction>
+      <correction shift="-1" type="AB certificate">2.82</correction>
+      <correction shift="1" type="AB certificate">3.90</correction>
+      <correction shift="2" type="AB certificate">0.07</correction>
+    </component>
+    <component name="117">
+      <moverz average="117.1516" monoisotopic="117.114424"/>
+      <correction shift="-2" type="AB certificate">0.06</correction>
+      <correction shift="-1" type="AB certificate">3.77</correction>
+      <correction shift="1" type="AB certificate">2.88</correction>
+      <correction shift="2" type="AB certificate">0.00</correction>
+    </component>
+    <component name="118">
+      <moverz average="118.1451" monoisotopic="118.111459"/>
+      <correction shift="-2" type="AB certificate">0.09</correction>
+      <correction shift="-1" type="AB certificate">4.71</correction>
+      <correction shift="1" type="AB certificate">1.91</correction>
+      <correction shift="2" type="AB certificate">0.00</correction>
+    </component>
+    <component name="119">
+      <moverz average="119.1377" monoisotopic="119.114814"/>
+      <correction shift="-2" type="AB certificate">0.14</correction>
+      <correction shift="-1" type="AB certificate">5.66</correction>
+      <correction shift="1" type="AB certificate">0.87</correction>
+      <correction shift="2" type="AB certificate">0.00</correction>
+    </component>
+    <component name="121">
+      <moverz average="121.1230" monoisotopic="121.121523"/>
+      <correction shift="-2" type="AB certificate">0.27</correction>
+      <correction shift="-1" type="AB certificate">7.44</correction>
+      <correction shift="1" type="AB certificate">0.18</correction>
+      <correction shift="2" type="AB certificate">0.00</correction>
+    </component>
+    <report_ratio name="114/113">
+      <numerator_component coefficient="1.0" name="114"></numerator_component>
+      <denominator_component coefficient="1.0" name="113"></denominator_component>
+    </report_ratio>
+    <report_ratio name="115/113">
+      <numerator_component coefficient="1.0" name="115"></numerator_component>
+      <denominator_component coefficient="1.0" name="113"></denominator_component>
+    </report_ratio>
+    <report_ratio name="116/113">
+      <numerator_component coefficient="1.0" name="116"></numerator_component>
+      <denominator_component coefficient="1.0" name="113"></denominator_component>
+    </report_ratio>
+    <report_ratio name="117/113">
+      <numerator_component coefficient="1.0" name="117"></numerator_component>
+      <denominator_component coefficient="1.0" name="113"></denominator_component>
+    </report_ratio>
+    <report_ratio name="118/113">
+      <numerator_component coefficient="1.0" name="118"></numerator_component>
+      <denominator_component coefficient="1.0" name="113"></denominator_component>
+    </report_ratio>
+    <report_ratio name="119/113">
+      <numerator_component coefficient="1.0" name="119"></numerator_component>
+      <denominator_component coefficient="1.0" name="113"></denominator_component>
+    </report_ratio>
+    <report_ratio name="121/113">
+      <numerator_component coefficient="1.0" name="121"></numerator_component>
+      <denominator_component coefficient="1.0" name="113"></denominator_component>
+    </report_ratio>
+    <exclusion>iTRAQ_variable</exclusion>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <outliers method="auto"/>
+    <protocol>
+      <reporter/>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="Proteome Sciences 6-plex Tandem Mass Tags(R)" min_num_peptides="2" name="TMT 6plex" protein_ratio_type="weighted" report_detail="true" require_bold_red="true">
+    <modifications mode="fixed" name="TMT fixed">
+      <mod_file>TMT6plex (N-term)</mod_file>
+      <mod_file>TMT6plex (K)</mod_file>
+    </modifications>
+    <component name="126">
+      <moverz average="126.2188" monoisotopic="126.127726"/>
+      <correction shift="-2" type="AB certificate">0.0</correction>
+      <correction shift="-1" type="AB certificate">0.1</correction>
+      <correction shift="1" type="AB certificate">8.5</correction>
+      <correction shift="2" type="AB certificate">0.5</correction>
+    </component>
+    <component name="127">
+      <moverz average="127.2114" monoisotopic="127.131080"/>
+      <correction shift="-2" type="AB certificate">0.1</correction>
+      <correction shift="-1" type="AB certificate">0.7</correction>
+      <correction shift="1" type="AB certificate">7.8</correction>
+      <correction shift="2" type="AB certificate">0.4</correction>
+    </component>
+    <component name="128">
+      <moverz average="128.2041" monoisotopic="128.134435"/>
+      <correction shift="-2" type="AB certificate">0.1</correction>
+      <correction shift="-1" type="AB certificate">1.3</correction>
+      <correction shift="1" type="AB certificate">6.6</correction>
+      <correction shift="2" type="AB certificate">0.5</correction>
+    </component>
+    <component name="129">
+      <moverz average="129.1968" monoisotopic="129.137790"/>
+      <correction shift="-2" type="AB certificate">0.1</correction>
+      <correction shift="-1" type="AB certificate">1.5</correction>
+      <correction shift="1" type="AB certificate">5.3</correction>
+      <correction shift="2" type="AB certificate">0.3</correction>
+    </component>
+    <component name="130">
+      <moverz average="130.1894" monoisotopic="130.141145"/>
+      <correction shift="-2" type="AB certificate">0.2</correction>
+      <correction shift="-1" type="AB certificate">2.0</correction>
+      <correction shift="1" type="AB certificate">4.7</correction>
+      <correction shift="2" type="AB certificate">0.2</correction>
+    </component>
+    <component name="131">
+      <moverz average="131.1828" monoisotopic="131.138180"/>
+      <correction shift="-2" type="AB certificate">0.1</correction>
+      <correction shift="-1" type="AB certificate">3.8</correction>
+      <correction shift="1" type="AB certificate">4.3</correction>
+      <correction shift="2" type="AB certificate">0.1</correction>
+    </component>
+    <report_ratio name="127/126">
+      <numerator_component coefficient="1.0" name="127"></numerator_component>
+      <denominator_component coefficient="1.0" name="126"></denominator_component>
+    </report_ratio>
+    <report_ratio name="128/126">
+      <numerator_component coefficient="1.0" name="128"></numerator_component>
+      <denominator_component coefficient="1.0" name="126"></denominator_component>
+    </report_ratio>
+    <report_ratio name="129/126">
+      <numerator_component coefficient="1.0" name="129"></numerator_component>
+      <denominator_component coefficient="1.0" name="126"></denominator_component>
+    </report_ratio>
+    <report_ratio name="130/126">
+      <numerator_component coefficient="1.0" name="130"></numerator_component>
+      <denominator_component coefficient="1.0" name="126"></denominator_component>
+    </report_ratio>
+    <report_ratio name="131/126">
+      <numerator_component coefficient="1.0" name="131"></numerator_component>
+      <denominator_component coefficient="1.0" name="126"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <outliers method="auto"/>
+    <protocol>
+      <reporter/>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="Proteome Sciences duplex Tandem Mass Tags(R)" min_num_peptides="2" name="TMT 2plex" protein_ratio_type="weighted" report_detail="true" require_bold_red="true">
+    <modifications mode="fixed" name="TMT fixed">
+      <mod_file>TMT2plex (N-term)</mod_file>
+      <mod_file>TMT2plex (K)</mod_file>
+    </modifications>
+    <component name="126">
+      <moverz average="126.2188" monoisotopic="126.127726"/>
+      <correction shift="-2" type="AB certificate">0.0</correction>
+      <correction shift="-1" type="AB certificate">0.1</correction>
+      <correction shift="1" type="AB certificate">8.5</correction>
+      <correction shift="2" type="AB certificate">0.5</correction>
+    </component>
+    <component name="127">
+      <moverz average="127.2114" monoisotopic="127.131080"/>
+      <correction shift="-2" type="AB certificate">0.1</correction>
+      <correction shift="-1" type="AB certificate">0.7</correction>
+      <correction shift="1" type="AB certificate">7.8</correction>
+      <correction shift="2" type="AB certificate">0.4</correction>
+    </component>
+    <report_ratio name="127/126">
+      <numerator_component coefficient="1.0" name="127"></numerator_component>
+      <denominator_component coefficient="1.0" name="126"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <outliers method="auto"/>
+    <protocol>
+      <reporter/>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="Zhang and Neubert, MCP 5 401-411 (2006), 95% enrichment" min_num_peptides="2" name="18O multiplex" protein_ratio_type="weighted" report_detail="true" require_bold_red="true">
+    <component name="18O0">
+      <modifications mode="variable">
+        <unmodified position="Any C-term" site="C-term"></unmodified>
+      </modifications>
+    </component>
+    <component name="18O1">
+      <modifications mode="variable">
+        <mod_file>Label:18O(1) (C-term)</mod_file>
+      </modifications>
+    </component>
+    <component name="18O2">
+      <modifications mode="variable">
+        <mod_file>Label:18O(2) (C-term)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="O" type="impurity">5.0</correction>
+      <correction element="18O" type="impurity">95.0</correction>
+    </component>
+    <report_ratio name="Heavy/Light">
+      <numerator_component coefficient="1.0" name="18O1"></numerator_component>
+      <numerator_component coefficient="1.0" name="18O2"></numerator_component>
+      <denominator_component coefficient="1.0" name="18O0"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <outliers method="auto"/>
+    <protocol>
+      <multiplex exclude_internal_label="true" exclude_isobaric_fragments="true" ion_intensity_threshold="0.1" min_ion_pairs="4">
+        <ion_series>y</ion_series>
+      </multiplex>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="Zhang and Neubert, MCP 5 401-411 (2006)" min_num_peptides="2" name="SILAC K+6 R+6 multiplex" protein_ratio_type="weighted" report_detail="true" require_bold_red="true">
+    <component name="light">
+      <modifications mode="variable">
+        <unmodified position="Any C-term" site="R"></unmodified>
+        <unmodified position="Any C-term" site="K"></unmodified>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="variable">
+        <local_definition title="13C6_NL_K">
+          <specificity position="Any C-term" site="K">
+            <NeutralLoss flag="false"/>
+            <NeutralLoss flag="false">
+              <element number="6" symbol="13C"/>
+              <element number="-6" symbol="C"/>
+            </NeutralLoss>
+          </specificity>
+          <delta>
+            <element number="6" symbol="13C"/>
+            <element number="-6" symbol="C"/>
+          </delta>
+        </local_definition>
+        <local_definition title="13C6_NL_R">
+          <specificity position="Any C-term" site="R">
+            <NeutralLoss flag="false"/>
+            <NeutralLoss flag="false">
+              <element number="6" symbol="13C"/>
+              <element number="-6" symbol="C"/>
+            </NeutralLoss>
+          </specificity>
+          <delta>
+            <element number="6" symbol="13C"/>
+            <element number="-6" symbol="C"/>
+          </delta>
+        </local_definition>
+      </modifications>
+    </component>
+    <report_ratio name="Heavy/Light">
+      <numerator_component coefficient="1.0" name="heavy"></numerator_component>
+      <denominator_component coefficient="1.0" name="light"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <outliers method="auto"/>
+    <protocol>
+      <multiplex exclude_internal_label="true" exclude_isobaric_fragments="true" ion_intensity_threshold="0.1" min_ion_pairs="4">
+        <ion_series>y</ion_series>
+      </multiplex>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="Serva ICPL(TM) duplex pre-digest, ignore Protein N-term" min_num_peptides="2" name="ICPL duplex pre-digest [MD]" protein_ratio_type="average" report_detail="true" require_bold_red="true">
+    <component name="light">
+      <modifications mode="exclusive">
+        <mod_file>ICPL (K)</mod_file>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive">
+        <mod_file>ICPL:13C(6) (K)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">0</correction>
+      <correction element="13C" type="impurity">100</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="Serva ICPL(TM) duplex post-digest, so all N-terms are labelled" min_num_peptides="2" name="ICPL duplex post-digest [MD]" protein_ratio_type="average" report_detail="true" require_bold_red="true">
+    <component name="light">
+      <modifications mode="exclusive">
+        <mod_file>ICPL (K)</mod_file>
+        <mod_file>ICPL (N-term)</mod_file>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive">
+        <mod_file>ICPL:13C(6) (K)</mod_file>
+        <mod_file>ICPL:13C(6) (N-term)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">0</correction>
+      <correction element="13C" type="impurity">100</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="Serva ICPL(TM) triplex, pre-digest, ignore Protein N-term" min_num_peptides="2" name="ICPL triplex pre-digest [MD]" protein_ratio_type="median" report_detail="true" require_bold_red="true" show_sub_sets="0.0">
+    <component name="light">
+      <modifications mode="exclusive">
+        <mod_file>ICPL (K)</mod_file>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive">
+        <mod_file>ICPL:13C(6) (K)</mod_file>
+      </modifications>
+    </component>
+    <component name="medium">
+      <modifications mode="exclusive" name="New Modification Group">
+        <mod_file>ICPL:2H(4) (K)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">0</correction>
+      <correction element="13C" type="impurity">100</correction>
+      <correction element="H" type="impurity">0</correction>
+      <correction element="2H" type="impurity">100</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <report_ratio name="L/M">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="medium"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <integration method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="true" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="Correction for 99% labelling" min_num_peptides="2" name="18O corrected [MD]" protein_ratio_type="average" report_detail="true" require_bold_red="true">
+    <component name="18O0">
+      <modifications mode="variable">
+        <unmodified position="Any C-term" site="C-term"></unmodified>
+      </modifications>
+    </component>
+    <component name="18O1">
+      <modifications mode="variable">
+        <mod_file>Label:18O(1) (C-term)</mod_file>
+      </modifications>
+    </component>
+    <component name="18O2">
+      <modifications mode="variable">
+        <mod_file>Label:18O(2) (C-term)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="O" type="impurity">1.0</correction>
+      <correction element="18O" type="impurity">99.0</correction>
+    </component>
+    <report_ratio name="Heavy/Light">
+      <numerator_component coefficient="1.0" name="18O1"></numerator_component>
+      <numerator_component coefficient="1.0" name="18O2"></numerator_component>
+      <denominator_component coefficient="1.0" name="18O0"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="15N Metabolic, 99% labelling" min_num_peptides="2" name="15N Metabolic [MD]" protein_ratio_type="average" report_detail="true" require_bold_red="true">
+    <component name="light">
+      <isotope>
+        <old>Ag</old>
+        <new>Au</new>
+      </isotope>
+    </component>
+    <component name="heavy">
+      <isotope>
+        <old>N</old>
+        <new>15N</new>
+      </isotope>
+      <correction element="15N" type="impurity">99.0</correction>
+      <correction element="N" type="impurity">1.0</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="15N + 13C metabolic labelling, both 99%" min_num_peptides="2" name="15N + 13C Metabolic [MD]" protein_ratio_type="median" report_detail="true" require_bold_red="true">
+    <component name="light">
+      <isotope>
+        <old>Ag</old>
+        <new>Au</new>
+      </isotope>
+    </component>
+    <component name="heavy">
+      <isotope>
+        <old>N</old>
+        <new>15N</new>
+      </isotope>
+      <isotope>
+        <old>C</old>
+        <new>13C</new>
+      </isotope>
+      <correction element="15N" type="impurity">99.0</correction>
+      <correction element="N" type="impurity">1.0</correction>
+      <correction element="13C" type="impurity">99.0</correction>
+      <correction element="C" type="impurity">1.0</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology" pep_threshold_value="0.05"/>
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta_unit="seconds" mass_delta="0.3" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="2 component SILAC, 99%" min_num_peptides="2" name="SILAC K+6 R+10 [MD]" protein_ratio_type="median" report_detail="true" require_bold_red="true">
+    <component name="light">
+      <modifications mode="exclusive">
+        <unmodified position="Anywhere" site="K"></unmodified>
+        <unmodified position="Anywhere" site="R"></unmodified>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive">
+        <mod_file>Label:13C(6) (K)</mod_file>
+        <mod_file>Label:13C(6)15N(4) (R)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">1.0</correction>
+      <correction element="13C" type="impurity">99.0</correction>
+      <correction element="N" type="impurity">1.0</correction>
+      <correction element="15N" type="impurity">99.0</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="2 component SILAC with Arg-Pro conversion, 99% enrichment" min_num_peptides="2" name="SILAC K+6 R+10 Arg-Pro [MD]" protein_ratio_type="median" report_detail="true" require_bold_red="true">
+    <modifications mode="variable" name="satellite">
+      <local_definition title="ArgPro">
+        <specificity position="Anywhere" site="P"/>
+        <delta>
+          <element number="5" symbol="13C"/>
+          <element number="1" symbol="15N"/>
+          <element number="-5" symbol="C"/>
+          <element number="-1" symbol="N"/>
+        </delta>
+      </local_definition>
+    </modifications>
+    <component name="light">
+      <modifications mode="exclusive">
+        <unmodified position="Anywhere" site="K"></unmodified>
+        <unmodified position="Anywhere" site="R"></unmodified>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive">
+        <mod_file>Label:13C(6) (K)</mod_file>
+        <mod_file>Label:13C(6)15N(4) (R)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">1.0</correction>
+      <correction element="13C" type="impurity">99.0</correction>
+      <correction element="N" type="impurity">1.0</correction>
+      <correction element="15N" type="impurity">99.0</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <exclusion>satellite</exclusion>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology" />
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="2 component SILAC" min_num_peptides="2" name="SILAC K+6 R+6 [MD]" protein_ratio_type="median" report_detail="true" require_bold_red="true">
+    <component name="light">
+      <modifications mode="exclusive">
+        <unmodified position="Anywhere" site="K"></unmodified>
+        <unmodified position="Anywhere" site="R"></unmodified>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive">
+        <mod_file>Label:13C(6) (K)</mod_file>
+        <mod_file>Label:13C(6) (R)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">0</correction>
+      <correction element="13C" type="impurity">100</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="3 component SILAC" min_num_peptides="2" name="SILAC R+6 R+10 [MD]" protein_ratio_type="average" report_detail="true" require_bold_red="true">
+    <component name="light">
+      <modifications mode="exclusive" name="unmodified">
+        <unmodified position="Anywhere" site="R"></unmodified>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive" name="R + 10">
+        <mod_file>Label:13C(6)15N(4) (R)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">0</correction>
+      <correction element="13C" type="impurity">100</correction>
+      <correction element="N" type="impurity">0</correction>
+      <correction element="15N" type="impurity">100</correction>
+    </component>
+    <component name="medium">
+      <modifications mode="exclusive" name="R + 6">
+        <mod_file>Label:13C(6) (R)</mod_file>
+      </modifications>
+    </component>
+    <report_ratio name="M/L">
+      <numerator_component coefficient="1.0" name="medium"></numerator_component>
+      <denominator_component coefficient="1.0" name="light"></denominator_component>
+    </report_ratio>
+    <report_ratio name="H/L">
+      <numerator_component coefficient="1.0" name="heavy"></numerator_component>
+      <denominator_component coefficient="1.0" name="light"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="2 component SILAC" min_num_peptides="2" name="SILAC K+8 R+10 [MD]" protein_ratio_type="median" report_detail="true">
+    <component name="light">
+      <modifications mode="exclusive">
+        <unmodified position="Anywhere" site="K"></unmodified>
+        <unmodified position="Anywhere" site="R"></unmodified>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive">
+        <mod_file>Label:13C(6)15N(2) (K)</mod_file>
+        <mod_file>Label:13C(6)15N(4) (R)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">0</correction>
+      <correction element="13C" type="impurity">100</correction>
+      <correction element="N" type="impurity">0</correction>
+      <correction element="15N" type="impurity">100</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology" pep_threshold_value="0.05"/>
+    <integration elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="3 component SILAC" min_num_peptides="2" name="SILAC K+4 K+8 R+6 R+10 [MD]" protein_ratio_type="median" report_detail="true">
+    <component name="Light">
+      <modifications mode="exclusive">
+        <unmodified position="Anywhere" site="K"></unmodified>
+        <unmodified position="Anywhere" site="R"></unmodified>
+      </modifications>
+    </component>
+    <component name="Medium">
+      <modifications mode="exclusive">
+        <mod_file>Label:2H(4) (K)</mod_file>
+        <mod_file>Label:13C(6) (R)</mod_file>
+      </modifications>
+    </component>
+    <component name="Heavy">
+      <modifications mode="exclusive">
+        <mod_file>Label:13C(6)15N(2) (K)</mod_file>
+        <mod_file>Label:13C(6)15N(4) (R)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">0.0</correction>
+      <correction element="13C" type="impurity">100.0</correction>
+      <correction element="N" type="impurity">0.0</correction>
+      <correction element="15N" type="impurity">100.0</correction>
+      <correction element="H" type="impurity">0.0</correction>
+      <correction element="2H" type="impurity">100.0</correction>
+    </component>
+    <report_ratio name="M/L">
+      <numerator_component coefficient="1.0" name="Medium"></numerator_component>
+      <denominator_component coefficient="1.0" name="Light"></denominator_component>
+    </report_ratio>
+    <report_ratio name="H/L">
+      <numerator_component coefficient="1.0" name="Heavy"></numerator_component>
+      <denominator_component coefficient="1.0" name="Light"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology" />
+    <integration elution_time_delta="0" elution_time_delta_unit="seconds" mass_delta="0" mass_delta_unit="ppm" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <normalisation method="none"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="Applied Biosystems ICAT(TM) reagent" min_num_peptides="2" name="ICAT ABI Cleavable [MD]" protein_ratio_type="average" report_detail="true" require_bold_red="true">
+    <component name="light">
+      <modifications mode="exclusive">
+        <mod_file>ICAT-C (C)</mod_file>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive">
+        <mod_file>ICAT-C:13C(9) (C)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">0</correction>
+      <correction element="13C" type="impurity">100</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <comp>*[C]</comp>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="Applied Biosystems original deuterated ICAT(TM)" min_num_peptides="2" name="ICAT D8 [MD]" protein_ratio_type="average" report_detail="true" require_bold_red="true">
+    <component name="light">
+      <modifications mode="exclusive">
+        <mod_file>ICAT-D (C)</mod_file>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive">
+        <mod_file>ICAT-D:2H(8) (C)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="H" type="impurity">0</correction>
+      <correction element="2H" type="impurity">100</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <comp>*[C]</comp>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology"/>
+    <integration elution_profile_correlation_threshold="0.1" elution_time_delta="60" elution_time_delta_unit="seconds" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="true" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="Labeling of N-term and Lysines with light, medium and heavy dimethylation reagent" min_num_peptides="2" name="Dimethylation [MD]" protein_ratio_type="average" report_detail="true">
+    <component name="Dimethyl">
+      <modifications mode="exclusive" name="Dimet1">
+        <mod_file>Dimethyl (K)</mod_file>
+        <mod_file>Dimethyl (N-term)</mod_file>
+      </modifications>
+    </component>
+    <component name="Dimethyl:2H(4)">
+      <modifications mode="exclusive" name="Dimet2">
+        <mod_file>Dimethyl:2H(4) (K)</mod_file>
+        <mod_file>Dimethyl:2H(4) (N-term)</mod_file>
+      </modifications>
+    </component>
+    <component name="Dimethyl:2H(6)13C(2)">
+      <modifications mode="exclusive" name="Dimet3">
+        <mod_file>Dimethyl:2H(6)13C(2) (K)</mod_file>
+        <mod_file>Dimethyl:2H(6)13C(2) (N-term)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">0</correction>
+      <correction element="13C" type="impurity">100</correction>
+      <correction element="H" type="impurity">0</correction>
+      <correction element="2H" type="impurity">100</correction>
+    </component>
+    <report_ratio name="L/M">
+      <numerator_component coefficient="1.0" name="Dimethyl"></numerator_component>
+      <denominator_component coefficient="1.0" name="Dimethyl:2H(4)"></denominator_component>
+    </report_ratio>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="Dimethyl"></numerator_component>
+      <denominator_component coefficient="1.0" name="Dimethyl:2H(6)13C(2)"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology" pep_threshold_value="0.05"/>
+    <integration elution_time_delta_unit="seconds" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="true" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="true" description="Shimadzu 13CNBS reagent" min_num_peptides="2" name="NBS Shimadzu [MD]" protein_ratio_type="median" report_detail="true">
+    <component name="light">
+      <modifications mode="exclusive">
+        <mod_file>NBS (W)</mod_file>
+      </modifications>
+    </component>
+    <component name="heavy">
+      <modifications mode="exclusive">
+        <mod_file>NBS:13C(6) (W)</mod_file>
+      </modifications>
+      <correction type="averagine">0.0</correction>
+      <correction element="C" type="impurity">0</correction>
+      <correction element="13C" type="impurity">100</correction>
+    </component>
+    <report_ratio name="L/H">
+      <numerator_component coefficient="1.0" name="light"></numerator_component>
+      <denominator_component coefficient="1.0" name="heavy"></denominator_component>
+    </report_ratio>
+    <comp>*[W]</comp>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology" pep_threshold_value="0.05"/>
+    <integration elution_time_delta="0" elution_time_delta_unit="seconds" mass_delta="0.1" mass_delta_unit="Da" method="simpsons" precursor_range="envelope" source="survey"/>
+    <outliers method="auto"/>
+    <protocol>
+      <precursor all_charge_states="true" allow_elution_shift="false" allow_mass_time_match="true"/>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="simple ratio, 3 files, label-free" min_num_peptides="2" name="Label-free [MD]" protein_ratio_type="median" report_detail="true" require_bold_red="true" show_sub_sets="0.00" sig_threshold_value="0.05">
+    <component name="C1">
+      <file_index>1</file_index>
+    </component>
+    <component name="C2">
+      <file_index>2</file_index>
+    </component>
+    <component name="Ref">
+      <file_index>3</file_index>
+    </component>
+    <report_ratio name="C1/Ref">
+      <numerator_component coefficient="1.0" name="C1"></numerator_component>
+      <denominator_component coefficient="1.0" name="Ref"></denominator_component>
+    </report_ratio>
+    <report_ratio name="C2/Ref">
+      <numerator_component coefficient="1.0" name="C2"></numerator_component>
+      <denominator_component coefficient="1.0" name="Ref"></denominator_component>
+    </report_ratio>
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology" pep_threshold_value="0.05" />
+    <integration elution_profile_correlation_threshold="999" elution_time_delta="500.0" elution_time_delta_unit="seconds" method="simpsons" source="survey" />
+    <outliers method="auto"/>
+    <normalisation method="none"/>
+    <protocol>
+      <replicate/>
+    </protocol>
+  </method>
+
+  <method constrain_search="false" description="Example of Average protocol" min_num_peptides="2" name="Average [MD]" protein_ratio_type="average" report_detail="true" require_bold_red="true" show_sub_sets="0.00" sig_threshold_value="0.05">
+    <quality isolated_precursor="false" min_precursor_charge="1" minimum_a1="0.0" pep_threshold_type="at least homology" pep_threshold_value="0.05" />
+    <integration elution_profile_correlation_threshold="999" elution_time_delta="0.0" elution_time_delta_unit="seconds" method="simpsons" source="survey" />
+    <outliers method="none"/>
+    <normalisation method="none"/>
+    <protocol>
+      <average />
+    </protocol>
+  </method>
+
+</quantitation>

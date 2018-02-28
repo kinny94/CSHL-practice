@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:rov="http://www.matrixscience.com/xmlns/schema/distiller_data_1" xmlns:rst="http://www.matrixscience.com/xmlns/schema/distiller_preferences_1" targetNamespace="http://www.matrixscience.com/xmlns/schema/distiller_data_1" elementFormDefault="qualified">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en-GB">
+				This schema is for describing an Distiller Configuration 
+				Including Preferences, Calculator, Mascot server config etc.
+				</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.matrixscience.com/xmlns/schema/distiller_preferences_1" schemaLocation="distiller_preferences_1.xsd"/>
+	<xsd:simpleType name="minorVersion_t">
+		<xsd:restriction base="xsd:unsignedShort">
+			<xsd:maxInclusive value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="distillerProject" type="rov:distillerProject_t"/>
+	<xsd:simpleType name="modtype_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="fix"/>
+			<xsd:enumeration value="var"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="modifications_t">
+		<xsd:sequence>
+			<xsd:element name="Mod" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:attribute name="Name" type="xsd:string"/>
+					<xsd:attribute name="type" type="rov:modtype_t"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="ICAT" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="ionSeries_t">
+		<xsd:attribute name="Ions" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="searchOptions_t">
+		<xsd:sequence>
+			<xsd:element name="Modifications" type="rov:modifications_t" minOccurs="0"/>
+			<xsd:element name="IonSeries" type="rov:ionSeries_t" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="PepUnit" type="xsd:string" use="optional"/>
+		<xsd:attribute name="FragUnit" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Taxonomy" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Database" type="xsd:string" use="optional"/>
+		<xsd:attribute name="PepTol" type="xsd:string" use="optional"/>
+		<xsd:attribute name="FragTol" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Missed" type="xsd:integer" use="optional"/>
+		<xsd:attribute name="ProtMass" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Enzyme" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Quantitation" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Instrument" type="xsd:string" use="optional"/>
+		<xsd:attribute name="ErrorTolerant" type="xsd:integer" use="optional"/>
+		<xsd:attribute name="Decoy" type="xsd:integer" use="optional"/>
+		<xsd:attribute name="PepIsotopeError" type="xsd:integer" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="massMarkLayout_t">
+		<xsd:attribute name="Orientation" type="xsd:integer"/>
+		<xsd:attribute name="BarHeight" type="xsd:integer"/>
+		<xsd:attribute name="ShapeHeight" type="xsd:integer"/>
+		<xsd:attribute name="ShapeColor" type="xsd:integer"/>
+		<xsd:attribute name="BarHeightMode" type="xsd:integer"/>
+		<xsd:attribute name="BarColor" type="xsd:integer"/>
+		<xsd:attribute name="Shape" type="xsd:integer"/>
+		<xsd:attribute name="Bar" type="xsd:integer"/>
+		<xsd:attribute name="ShapeHeightMode" type="xsd:integer"/>
+	</xsd:complexType>	
+	<xsd:complexType name="distillerProject_t">
+		<xsd:sequence>
+			<xsd:element name="dataset" type="rov:dataset_t"/>
+			<xsd:element ref="rst:distillerPreferences"/>
+			<xsd:element name="mascotConfig" type="rov:mascotConfig_t"/>
+			<xsd:element name="document" type="rov:document_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="majorVersion" type="xsd:unsignedShort" use="required" fixed="1"/>
+		<xsd:attribute name="minorVersion" type="rov:minorVersion_t" use="required"/>
+		<xsd:attribute name="distillerVersion" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="dataset_t">
+		<xsd:sequence>
+			<xsd:element name="SummedScans" type="rov:summedScans_t"/>
+			<xsd:element name="Calculator" type="rov:calculator_t"/>
+			<xsd:element name="SequenceTags" type="rov:sequencetags_t"/>
+			<xsd:element name="mascotsearches" type="rov:mascotsearches_t"/>
+			<xsd:element name="DenovoIndex" type="rov:denovoindex_t"/>
+			<xsd:element name="Quantitation" type="rov:quantitation_t"  minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="denovoResult_t">
+		<xsd:attribute name="Segment" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="denovoindex_t">
+		<xsd:sequence minOccurs="0">
+			<xsd:element name="DenovoResult" type="rov:denovoResult_t"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="peaklisttype_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="left"/>
+			<xsd:enumeration value="right"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="seqTagPeak_t">
+		<xsd:attribute name="Virt" type="xsd:integer"/>
+		<xsd:attribute name="Miss" type="xsd:integer"/>
+		<xsd:attribute name="Nodes" type="xsd:integer"/>
+		<xsd:attribute name="MZ" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="seqTagPeaklist_t">
+		<xsd:sequence>
+			<xsd:element name="Peak" type="rov:seqTagPeak_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="type" type="rov:peaklisttype_t"/>
+	</xsd:complexType>
+	<xsd:complexType name="sequencetag_t">
+		<xsd:sequence>
+			<xsd:element name="PeakList" type="rov:seqTagPeaklist_t" minOccurs="0" maxOccurs="2"/>
+		</xsd:sequence>
+		<xsd:attribute name="ShowComp" type="xsd:integer"/>
+		<xsd:attribute name="StartPeakID" type="xsd:integer"/>
+		<xsd:attribute name="PeakListID" type="xsd:integer"/>
+		<xsd:attribute name="ErrorTag" type="xsd:integer"/>
+		<xsd:attribute name="PrecursorCharge" type="xsd:integer"/>
+		<xsd:attribute name="MissedPeak" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="sequencetags_t">
+		<xsd:sequence>
+			<xsd:element name="SequenceTag" type="rov:sequencetag_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="summedScans_t">
+		<xsd:sequence>
+			<xsd:element name="Sum" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:attribute name="start" type="xsd:integer"/>
+					<xsd:attribute name="end" type="xsd:integer"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="modificationMap_t">
+		<xsd:sequence>
+			<xsd:element name="Mod" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:attribute name="pos" type="xsd:integer"/>
+					<xsd:attribute name="mod" type="xsd:string"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="peptide_t">
+		<xsd:sequence>
+			<xsd:element name="ModMap" type="rov:modificationMap_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="CTermNL" type="xsd:integer"/>
+		<xsd:attribute name="NTermNL" type="xsd:integer"/>
+		<xsd:attribute name="Sequence" type="xsd:string"/>
+		<xsd:attribute name="NLs" type="xsd:string"/>
+		<xsd:attribute name="NTermMod" type="xsd:string" use="optional"/>
+		<xsd:attribute name="CTermMod" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="fragment_t">
+		<xsd:sequence>
+			<xsd:element name="SearchOptions" type="rov:searchOptions_t"/>
+			<xsd:element name="MMLayout" type="rov:massMarkLayout_t"/>
+			<xsd:element name="peptide" type="rov:peptide_t"/>
+			<xsd:element name="IonSeries" type="rov:ionSeries_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="CTermClr" type="xsd:integer"/>
+		<xsd:attribute name="NTermCharge" type="xsd:integer"/>
+		<xsd:attribute name="CTermCharge" type="xsd:integer"/>
+		<xsd:attribute name="Show" type="xsd:integer"/>
+		<xsd:attribute name="NTermClr" type="xsd:integer"/>
+		<xsd:attribute name="ToolTip" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Label" type="xsd:string"/>
+		<xsd:attribute name="Instrument" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="fragments_t">
+		<xsd:sequence minOccurs="0">
+			<xsd:element name="Fragment" type="rov:fragment_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="protein_t">
+		<xsd:sequence>
+			<xsd:element name="ModMap" type="rov:modificationMap_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="Sequence" type="xsd:string"/>
+		<xsd:attribute name="NTerm" type="xsd:string" use="optional"/>
+		<xsd:attribute name="CTerm" type="xsd:string" use="optional"/>
+		<xsd:attribute name="PepNTerm" type="xsd:string" use="optional"/>
+		<xsd:attribute name="PepCTerm" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="digest_t">
+		<xsd:sequence>
+			<xsd:element name="SearchOptions" type="rov:searchOptions_t"/>
+			<xsd:element name="Protein" type="rov:protein_t"/>
+		</xsd:sequence>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="LineColor" type="xsd:integer"/>
+		<xsd:attribute name="PeakColor" type="xsd:integer"/>
+		<xsd:attribute name="Charge" type="xsd:string"/>
+		<xsd:attribute name="Show" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="digests_t">
+		<xsd:sequence minOccurs="0">
+			<xsd:element name="Digest" type="rov:digest_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="calculator_t">
+		<xsd:sequence>
+			<xsd:element name="Fragments" type="rov:fragments_t"/>
+			<xsd:element name="Digests" type="rov:digests_t"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="mascotsearches_t">
+		<xsd:sequence minOccurs="0">
+			<xsd:element name="MascotSearch" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="MascotImportOptions" type="rov:MascotImportOptions_t" minOccurs="0" maxOccurs="1" />
+					</xsd:sequence>
+					<xsd:attribute name="TaskID" type="xsd:string"/>
+					<xsd:attribute name="Loaded" type="xsd:integer"/>
+					<xsd:attribute name="ReportTop" type="xsd:integer" use="optional" />
+					<xsd:attribute name="cacheFileName" type="xsd:string" use="optional" />
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="scoringType_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration  value="auto"/>
+			<xsd:enumeration  value="mudpit" />
+			<xsd:enumeration value="standard" />
+		</xsd:restriction>
+	</xsd:simpleType>	
+	<xsd:complexType name="MascotImportOptions_t">
+		<xsd:sequence>
+			<xsd:element name="blueoptions" type="rov:blueoptions" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="quant_method_extra" type="rov:quantMethodExtra_t" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+		<xsd:attribute name="quantMethod" type="xsd:string" use="optional"/>
+		<xsd:attribute name="firsttime" type="xsd:integer" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="blueoptions">
+		<xsd:attribute name="requireBoldRed" type="xsd:boolean" use="optional"/>
+		<xsd:attribute name="showSameset" type="xsd:boolean" use="optional"/>
+		<xsd:attribute name="showSubset" type="xsd:string" use="optional"/>
+		<xsd:attribute name="loadUnassignedList" type="xsd:boolean" use="optional"/>
+		<xsd:attribute name="significanceThreshold" type="xsd:string" use="optional" />
+		<xsd:attribute name="scoringType" type="rov:scoringType_t" use="optional" />
+		<xsd:attribute name="reportTop" type="xsd:integer" use="optional" />
+		<xsd:attribute name="ionScoreCutOff" type="xsd:integer" use="optional" />
+		<xsd:attribute name="ErrTolPeptide" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="proteinGrouping" type="xsd:string" use="optional" />
+		<xsd:attribute name="percolator" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="ScoreExpectCutOff" type="xsd:string" use="optional" />
+		<xsd:attribute name="showSamesetFamily" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="showSubsetFamily" type="xsd:boolean" use="optional" />		
+		<xsd:attribute name="significanceThresholdStr" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="quantMethodExtra_t">
+		<xsd:attribute name="matchedRho" type="xsd:string" use="optional" />
+		<xsd:attribute name="allChargeStateThreshold" type="xsd:string" use="optional" />
+		<xsd:attribute name="XICThreshold" type="xsd:string" use="optional" />
+		<xsd:attribute name="maxXICwidth" type="xsd:string" use="optional" />
+		<xsd:attribute name="isolatedPrecursorThreshold" type="xsd:string" use="optional" />
+		<xsd:attribute name="XICSmooth" type="xsd:string" use="optional" />
+		<xsd:attribute name="SimpleRatio" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="quantitation_t">
+		<xsd:sequence>
+			<xsd:element name="QuantResult" type="rov:quantResult_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="counter" type="xsd:integer" />
+	</xsd:complexType>
+	<xsd:complexType name="quantResult_t">
+		<xsd:attribute name="TaskID" type="xsd:string"/>
+		<xsd:attribute name="projectStream" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="mascotConfig_t">
+		<xsd:sequence>
+			<xsd:element name="enzymes">
+				<xsd:complexType>
+					<xsd:attribute name="Val" type="xsd:string"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="masses" minOccurs="0">
+				<xsd:complexType>
+					<xsd:attribute name="Val" type="xsd:string"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="mod_file" minOccurs="0">
+				<xsd:complexType>
+					<xsd:attribute name="Val" type="xsd:string"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="taxonomy" >
+				<xsd:complexType>
+					<xsd:attribute name="Val" type="xsd:string"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="fragmentation_rules">
+				<xsd:complexType>
+					<xsd:attribute name="Val" type="xsd:string"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="mascotdat">
+				<xsd:complexType>
+					<xsd:attribute name="Val" type="xsd:string"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="file" minOccurs="0" maxOccurs="unbounded" >
+				<xsd:complexType>
+					<xsd:attribute name="configfile" type="xsd:string"/>
+					<xsd:attribute name="content" type="xsd:string"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="winpos_t">
+		<xsd:attribute name="viewID" type="xsd:integer"/>
+		<xsd:attribute name="top" type="xsd:integer"/>
+		<xsd:attribute name="bottom" type="xsd:integer"/>
+		<xsd:attribute name="left" type="xsd:integer"/>
+		<xsd:attribute name="right" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="document_t">
+		<xsd:sequence>
+			<xsd:element name="window" type="rov:winpos_t" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="ItemTree" type="xsd:integer"/>
+		<xsd:attribute name="CurrentTree" type="xsd:integer"/>
+		<xsd:attribute name="ItemPath" type="xsd:string"/>
+		<xsd:attribute name="quantMatch" type="xsd:string" use="optional"/>
+		<xsd:attribute name="quantMatch_charge" type="xsd:integer" use="optional"/>
+	</xsd:complexType>
+</xsd:schema>
